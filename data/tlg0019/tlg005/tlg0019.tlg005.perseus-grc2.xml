@@ -67,9 +67,17 @@
          </refsDecl>
          <refsDecl n="CTS" xml:id="CTS">
             <citeStructure match="/TEI/text/body" use="@xml:base">
-               <citeStructure use="@n" match=".//milestone[@unit='card']" delim=":" unit="card"
+               <citeStructure unit="scene" delim=":"
+                  match="div[@type]"
+                  use="concat((.//l)[1]/@n, '-', (.//l)[last()]/@n)"
                   n="chunk" />
-               <citeStructure unit="line" delim=":" match=".//l" use="@n" />
+            </citeStructure>
+         </refsDecl>
+
+         <refsDecl n="CTS" xml:id="CTS-card">
+            <citeStructure match="/TEI/text/body" use="@xml:base">
+               <citeStructure match=".//milestone[@unit='card']"
+                  unit="card" delim=":" use="@n" n="chunk" />
             </citeStructure>
          </refsDecl>
       </encodingDesc>
@@ -120,7 +128,7 @@
    </teiHeader>
    <text>
       <body xml:base="urn:cts:greekLit:tlg0019.tlg005.perseus-grc2">
-         <div type="prologue">
+         <div type="prologue" n="Prologue (1-300)">
             <l resp="perseus" style="hidden" n="0" />
             <milestone n="1" unit="card" />
             <sp>
@@ -873,7 +881,7 @@
             </div>
          </div>
          <milestone ed="p" n="301" unit="card" />
-         <div type="parodos">
+         <div type="parodos" n="Parados (301-345)">
             <div type="trochees">
                <sp>
                   <speaker>Χορός</speaker>
@@ -990,7 +998,7 @@
             </div>
          </div>
          <milestone ed="p" n="346" unit="card" />
-         <div type="choral">
+         <div type="choral" n="First Syzygy (346-656)">
             <div n="1" type="strophe">
                <sp>
                   <speaker>Χορός</speaker>
@@ -1722,7 +1730,7 @@
             </div>
          </div>
          <milestone ed="p" n="657" unit="card" />
-         <div type="episode">
+         <div type="episode" n="First Episode (657-728)">
             <sp>
                <speaker>Τρυγαῖος</speaker>
                <l n="657">ἀλλʼ ὅ τι σιωπᾷς ὦ πότνια κάτειπέ μοι.</l>
@@ -1940,7 +1948,7 @@
             </sp>
          </div>
          <milestone ed="p" n="729" unit="card" />
-         <div type="parabasis">
+         <div type="parabasis" n="First Parabasis (729-818)">
             <div type="prelude">
                <sp>
                   <speaker>Χορός</speaker>
@@ -2055,7 +2063,7 @@
             </div>
          </div>
          <milestone ed="p" n="819" unit="card" />
-         <div type="lyric-scene">
+         <div type="lyric-scene" n="Second Syzygy (819-921)">
             <sp>
                <speaker>Τρυγαῖος</speaker>
                <l n="819">ὡς χαλεπὸν ἐλθεῖν ἦν ἄρʼ εὐθὺ τῶν θεῶν.</l>
@@ -2352,7 +2360,7 @@
             </div>
          </div>
          <milestone ed="p" n="922" unit="card" />
-         <div type="lyric-scene">
+         <div type="lyric-scene" n="Third Syzygy (922-1126)">
             <sp>
                <speaker>Οἰκέτης</speaker>
                <l n="922">ἄγε δὴ τί νῷν ἐντευθενὶ ποιητέον;</l>
@@ -3000,7 +3008,7 @@
             </div>
          </div>
          <milestone ed="p" n="1127" unit="card" />
-         <div type="parabasis">
+         <div type="parabasis" n="Second Parabasis (1127-1190)">
             <div n="1" type="strophe">
                <sp>
                   <speaker>Χορός</speaker>
@@ -3102,7 +3110,7 @@
             </div>
          </div>
          <milestone ed="p" n="1191" unit="card" />
-         <div type="episode">
+         <div type="episode" n="Second Episode (1191-1304)">
             <sp>
                <speaker>Τρυγαῖος</speaker>
                <l n="1191">ἰοὺ ἰού.</l>
@@ -3445,7 +3453,7 @@
             </div>
          </div>
          <milestone ed="p" n="1305" unit="card" />
-         <div type="exodus">
+         <div type="exodus" n="Exodus (1305-1357)">
             <div type="lyric">
                <sp>
                   <speaker>Τρυγαῖος</speaker>
