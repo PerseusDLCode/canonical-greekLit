@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-model href="https://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?><TEI xmlns="http://www.tei-c.org/ns/1.0">
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-model href="https://raw.githubusercontent.com/PerseusDLCode/perseus-schemas/main/perseus_drama.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
    <teiHeader xml:lang="eng">
       <fileDesc>
          <titleStmt>
@@ -21,6 +23,7 @@
             <publisher>Trustees of Tufts University</publisher>
             <pubPlace>Medford, MA</pubPlace>
             <authority>Perseus Project</authority>
+            <idno type="CTS">urn:cts:greekLit:tlg0011.tlg008.perseus-grc2</idno>
          </publicationStmt>
          <sourceDesc>
             <biblStruct>
@@ -36,81 +39,98 @@
                   </imprint>
                   <biblScope unit="volume">9</biblScope>
                </monogr>
-               <ref target="https://archive.org/details/pt9oxyrhynchuspa00grenuoft/page/36/mode/2up">Internet Archive</ref>
+               <ref target="https://archive.org/details/pt9oxyrhynchuspa00grenuoft/page/36/mode/2up">Internet
+                  Archive</ref>
             </biblStruct>
          </sourceDesc>
       </fileDesc>
       <encodingDesc>
          <refsDecl n="CTS">
-            <cRefPattern n="line" matchPattern="(\w+)" replacementPattern="#xpath(/tei:TEI/tei:text/tei:body/tei:div//tei:l[@n='$1'])">
+            <cRefPattern n="line" matchPattern="(\w+)"
+               replacementPattern="#xpath(/tei:TEI/tei:text/tei:body/tei:div//tei:l[@n='$1'])">
                <p>This pointer pattern extracts line</p>
             </cRefPattern>
          </refsDecl>
-         <!--<refsDecl n="CTS">
-          <cRefPattern n="card" matchPattern="(\w+)" replacementPattern="#xpath(/tei:TEI/tei:text/tei:body/tei:div/tei:div[@n='$1'])">
+         <!--<refsDecl
+         n="CTS">
+          <cRefPattern n="card" matchPattern="(\w+)"
+         replacementPattern="#xpath(/tei:TEI/tei:text/tei:body/tei:div/tei:div[@n='$1'])">
              <p>This pointer pattern extracts cards</p>
             </cRefPattern>
          </refsDecl>-->
+         <refsDecl n="CTS" xml:id="CTS">
+            <citeStructure match="/TEI/text/body" use="@xml:base">
+               <citeStructure unit="scene" delim=":"
+                  match="div[@type]"
+                  use="concat((.//l)[1]/@n, '-', (.//l)[last()]/@n)"
+                  n="chunk" />
+            </citeStructure>
+         </refsDecl>
+
+         <refsDecl n="CTS" xml:id="CTS-card">
+            <citeStructure match="/TEI/text/body" use="@xml:base">
+               <citeStructure match=".//milestone[@unit='card']"
+                  unit="card" delim=":" use="@n" n="chunk" />
+            </citeStructure>
+         </refsDecl>
       </encodingDesc>
       <profileDesc>
+         <textClass>
+            <catRef scheme="#perseus-genre" target="#drama-line" />
+         </textClass>
          <langUsage>
             <language ident="grc">Greek</language>
             <language ident="eng">English</language>
          </langUsage>
       </profileDesc>
       <revisionDesc>
-         <change when="2017-02-16" who="Lisa Cerrato">review of EpiDoc and CTS compliance; removed English from notes; entities, etc.</change>
+         <change when="2017-02-16" who="Lisa Cerrato">review of EpiDoc and CTS compliance; removed
+            English from notes; entities, etc.</change>
          <change when="2016-01-15" who="TDBuck">p4 to p5</change>
-      
-<change when="2013-09-13" who="balmas01">moving Greg's work-in-progress on CTS-izing greco-roman collection texts to a Work directory</change>
-
-<change when="2013-06-13" who="gcrane">tagging now should be compatible with CTS</change>
-
-<change when="2010-12-24" who="gcrane">base files for SDL</change>
-
-<change when="2009-12-08" who="rsingh04">moved more xml files around based on copyright status</change>
-
-<change when="2005-07-25" who="packel">Converted to XML</change>
-
-<change when="2004-04-21" who="mimno">added card 1s</change>
-
-<change when="2003-07-01" who="yorkc">Updated texts to TEI P4 and Perseus P4 extensions; minor cleanup (esp. character encodings and typos.)</change>
-
-<change when="2001-03-19" who="amahoney">mark one supplement as "unclear" to demonstrate the new rule in the spec;
-I think this particular one is a true supplement rather than an unclear letter, but it really doesn't matter a whole lot for this purpose or in this text</change>
-
-<change when="2001-01-02" who="amahoney">move credits for editors to filedesc proper so they'll show in pulldown
+         <change when="2013-09-13" who="balmas01">moving Greg's work-in-progress on CTS-izing
+            greco-roman collection texts to a Work directory</change>
+         <change when="2013-06-13" who="gcrane">tagging now should be compatible with CTS</change>
+         <change when="2010-12-24" who="gcrane">base files for SDL</change>
+         <change when="2009-12-08" who="rsingh04">moved more xml files around based on copyright
+            status</change>
+         <change when="2005-07-25" who="packel">Converted to XML</change>
+         <change when="2004-04-21" who="mimno">added card 1s</change>
+         <change when="2003-07-01" who="yorkc">Updated texts to TEI P4 and Perseus P4 extensions;
+            minor cleanup (esp. character encodings and typos.)</change>
+         <change when="2001-03-19" who="amahoney">mark one supplement as "unclear" to demonstrate
+            the new rule in the spec;
+            I think this particular one is a true supplement rather than an unclear letter, but it
+            really doesn't matter a whole lot for this purpose or in this text</change>
+         <change when="2001-01-02" who="amahoney">move credits for editors to filedesc proper so
+            they'll show in pulldown
 </change>
-<change when="2000-12-29" who="amahoney">the translation is ready to go</change>
-
-<change when="2000-12-04" who="amahoney">new text</change>
-<change when="2000-10-29" who="AEM">Initial text, based roughly on Oxyrhynchus Papyri IX</change>
+         <change when="2000-12-29" who="amahoney">the translation is ready to go</change>
+         <change when="2000-12-04" who="amahoney">new text</change>
+         <change when="2000-10-29" who="AEM">Initial text, based roughly on Oxyrhynchus Papyri IX</change>
       </revisionDesc>
    </teiHeader>
-   
    <text xml:lang="grc">
-      <body>
-         <div type="edition" n="urn:cts:greekLit:tlg0011.tlg008.perseus-grc2" xml:lang="grc">
-         <milestone unit="card" n="1"/>
-         <milestone n="1" unit="column"/>
+      <body xml:base="urn:cts:greekLit:tlg0011.tlg008.perseus-grc2">
+         <milestone unit="card" n="1" />
+         <milestone n="1" unit="column" />
          <sp>
             <speaker>Ἀπόλλων</speaker>
             <l n="1"> ]κιο[</l>
             <l n="2"> ]πειτα[</l>
             <l n="3"> ]<unclear>ἐ</unclear>πεσσύθ[ην</l>
-            <l n="5"> ]γ[<gap reason="lost"/>]λ[</l>
+            <l n="5"> ]γ[<gap reason="lost" />]λ[</l>
             <l n="6"> ]ω[</l>
             <l n="7">[πᾶσιν θεοῖς καὶ πᾶσι]ν ἀγγέλλω [β]ροτο[ῖς</l>
-            <l n="8">[καὶ <gap reason="lost"/> δῶρʼ ὑπις]χνοῦμαι τελεῖ[ν</l>
-            <l n="9">[   ἀ]πόπροθεν·</l>
+            <l n="8">[καὶ <gap reason="lost" /> δῶρʼ ὑπις]χνοῦμαι τελεῖ[ν</l>
+            <l n="9">[ ἀ]πόπροθεν·</l>
             <l n="10">
-               <gap reason="lost"/>ον[ <gap reason="lost"/>δύς]λοφον φρενὶ</l>
+               <gap reason="lost" />ον[ <gap reason="lost" />δύς]λοφον φρενὶ</l>
             <l n="11">
-               <gap reason="lost"/>τα[ <gap reason="lost"/> βο]ῦς ἀμολγάδας</l>
+               <gap reason="lost" />τα[ <gap reason="lost" /> βο]ῦς ἀμολγάδας</l>
             <l n="12">[μός]χους [τε καὶ νέων νόμευμ]α πορτίδων</l>
             <l n="13">[ἅπα]ντα φρ[οῦδα καὶ μάτη]ν ἰχνοσκοπῶ</l>
             <l n="14">[λαθ]ραῖʼ ἰόν[τα τῆλε βου]στάθμου κάπης</l>
-            <l n="15">[ἀφα]νῶς τέχνα[ισιν·  ὡς  ἐ]γὼ οὐκ ἂν ᾠόμην</l>
+            <l n="15">[ἀφα]νῶς τέχνα[ισιν· ὡς ἐ]γὼ οὐκ ἂν ᾠόμην</l>
             <l n="16">[οὔτʼ ἂ]ν θεῶν τιν[ʼ οὔτʼ ἐφημ]έρων βροτῶν</l>
             <l n="17">[δρᾶς]αι τόδʼ ἔργ[ον ὧδερσθβ; πρὸς τόλμαν πεσεῖν.</l>
             <l n="18">[ταῦτ]ʼ οὖν ἐπείπερ [ἔμα]θον ἐκπλαγεὶς ὄκνῳ</l>
@@ -118,32 +138,33 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="20">[θεοῖ]ς βροτοῖς τε μηδένʼ ἀγνοεῖν τάδε.</l>
             <l n="21">[ἀκολο]υθίᾳ γὰρ ἐμμανὴς κυνηγετῶ·</l>
             <l n="22">[Θρᾳκ]ῶν δʼ ἐπῆλθ[ο]ν φ[ῦ]λα τ[οῦ] παντὸς στρατ[οῦ</l>
-            <l n="23">[ἀλλʼ οὔ]τις[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 21 letters</note>]</l>
+            <l n="23">[ἀλλʼ οὔ]τις[<gap reason="lost" />
+               <note anchored="true" place="inline"
+                  xml:lang="eng" resp="ed">about 21 letters</note>]</l>
             <l n="24">
                <note anchored="true" place="inline" xml:lang="eng" resp="ed">four lines missing here</note>
             </l>
             <l n="25">
-               <gap reason="lost"/>ς<gap reason="lost"/>
+               <gap reason="lost" />ς<gap reason="lost" />
             </l>
             <l n="26">
-               <gap reason="lost"/>λ<gap reason="lost"/>κιο<gap reason="lost"/>
+               <gap reason="lost" />λ<gap reason="lost" />κιο<gap reason="lost" />
             </l>
             <l n="27">
-               <gap reason="lost"/>ις<gap reason="lost"/>ἔπειτα [δὲ</l>
+               <gap reason="lost" />ις<gap reason="lost" />ἔπειτα [δὲ</l>
             <l n="30">[τ]ὰ Θεσσαλῶν [τʼ ἔγκαρπα πεδίʼ ἐ]πεσσύθ[ην</l>
             <l n="31">Βοιωτίας τε γ[ῆς πολυκτήτου]ς [πό]λ]εις,</l>
             <l n="32">[ἔπει]τα δʼ[</l>
             <l n="33">
                <note anchored="true" place="inline" xml:lang="eng" resp="ed">one line missing here</note>
-               <milestone n="2" unit="column"/>
+               <milestone n="2" unit="column" />
             </l>
             <l n="34">
-               <gap reason="lost"/>ς Δωρικο[</l>
-            <l n="35">[<gap reason="lost"/>γεί]τονʼ ἐνθ[εν</l>
-            <l n="36">[<gap reason="lost"/> ]ήκω ξυν[]α[</l>
-            <l n="37">[<gap reason="lost"/> Κυλ]λήνης τε δύ[σβατον</l>
-            <l n="38">[<gap reason="lost"/> ]τε χῶρον, ἐς δʼ ὑλ[</l>
+               <gap reason="lost" />ς Δωρικο[</l>
+            <l n="35">[<gap reason="lost" />γεί]τονʼ ἐνθ[εν</l>
+            <l n="36">[<gap reason="lost" /> ]ήκω ξυν[]α[</l>
+            <l n="37">[<gap reason="lost" /> Κυλ]λήνης τε δύ[σβατον</l>
+            <l n="38">[<gap reason="lost" /> ]τε χῶρον, ἐς δʼ ὑλ[</l>
             <l n="39">[ὡς εἴτε ποι]μὴν εἴτʼ ἀγρωστή[ρων τις ἢ</l>
             <l n="40">[μαριλοκαυ]τῶν ἐν λόγῳ παρ[ίσταται</l>
             <l n="41">[ἢ τῶν ὀρ]είων νυμφογεννή[του γένους</l>
@@ -160,14 +181,15 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="49">θέλων γενέσθαι τῷδʼ ἐπεσσύθην δρ[ό]μ[ῳ,</l>
             <l n="50">ἄν πως τὸ χρῆμα τοῦτό σοι κυνηγ[έ]σω.</l>
             <l n="51">τ[ὸ]τʼ αγγε[λό]ς μοι κείμενον χρ[υ]σο[ν ς]τέφε</l>
-            <l n="52">μά[λι]στʼ ἐπ<gap reason="lost"/> αις[ι π]ρόσθε ς<gap reason="lost"/>ν,</l>
-            <l n="53">παῖδας δʼ εμ[οὺ]ς ὄσσοισι <gap reason="lost"/>αυε<gap reason="lost"/>βα<gap reason="lost"/>
+            <l n="52">μά[λι]στʼ ἐπ<gap reason="lost" /> αις[ι π]ρόσθε ς<gap reason="lost" />ν,</l>
+            <l n="53">παῖδας δʼ εμ[οὺ]ς ὄσσοισι <gap reason="lost" />αυε<gap reason="lost" />βα<gap
+                  reason="lost" />
             </l>
-            <l n="54">[<gap reason="lost"/> ιμ]ʼ [ἂ]ν εἴπερ ἐκτε[λ]εῖς ἅπερ λέγεις</l>
+            <l n="54">[<gap reason="lost" /> ιμ]ʼ [ἂ]ν εἴπερ ἐκτε[λ]εῖς ἅπερ λέγεις</l>
          </sp>
          <sp>
             <speaker>Ἀπόλλων</speaker>
-            <l n="55">[<gap reason="lost"/> ]ώσω· μοῦνον ἐμπ[έδου τ]άδε.</l>
+            <l n="55">[<gap reason="lost" /> ]ώσω· μοῦνον ἐμπ[έδου τ]άδε.</l>
          </sp>
          <sp>
             <speaker>Σιληνός</speaker>
@@ -179,12 +201,12 @@ I think this particular one is a true supplement rather than an unclear letter, 
          </sp>
          <sp>
             <speaker>Σιληνός</speaker>
-            <l n="58">[<gap reason="lost"/>]ις <gap reason="lost"/> ε<gap reason="lost"/>ζητ<gap reason="lost"/>[</l>
+            <l n="58">[<gap reason="lost" />]ις <gap reason="lost" /> ε<gap reason="lost" />ζητ<gap
+                  reason="lost" />[</l>
          </sp>
          <sp>
             <speaker>Ἀπόλλων</speaker>
-            <l n="59">[<gap reason="lost"/>]εσο[
-<milestone n="3" unit="column"/>
+            <l n="59">[<gap reason="lost" />]εσο[ <milestone n="3" unit="column" />
             </l>
             <l n="60">
                <note anchored="true" place="inline" xml:lang="eng" resp="ed">one line missing here</note>
@@ -193,47 +215,59 @@ I think this particular one is a true supplement rather than an unclear letter, 
          <sp>
             <speaker>Ἀπόλλων</speaker>
             <l n="61">
-               <gap reason="lost"/>α[ <gap reason="lost"/>]</l>
+               <gap reason="lost" />α[ <gap reason="lost" />]</l>
          </sp>
          <sp>
             <speaker>Σιληνός</speaker>
-            <l n="62">τί τοῦτο; πο[ι<gap reason="lost"/>λέγ]εις;</l>
+            <l n="62">τί τοῦτο; πο[ι<gap reason="lost" />λέγ]εις;</l>
          </sp>
          <sp>
             <speaker>Ἀπόλλων</speaker>
             <l n="63">ἐλεύθερος σὺ [πᾶν τε γένος ἔσται τέκν]ων.
 
             </l>
-         </sp><milestone unit="card" n="64"/>
+         </sp>
+         <milestone unit="card" n="64" />
          <sp>
             <speaker>Χορὸς Σατύρων</speaker>
-            <l n="64">ἴθʼ ἄγε δ[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">at most 16 ll.</note>]</l>
-            <l n="65">πόδα βά[σιν τε<gap reason="lost"/>]ν</l>
-            <l n="66">ἀπαπαπ[αῖ   <gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">at most 15 ll.</note>]</l>
-            <l n="67">ὢ ὤ, σέ τοι [  <gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">at most 14 ll.</note>]</l>
-            <l n="68">ἔπιθι κλωπ[  <gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">at most 13 ll.</note>]</l>
-            <l n="69">ὑπόνομα κ[   <gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">at most 15 ll.</note>]</l>
-            <l n="70">διανύτων ό[  <gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">at most 14 ll.</note>]</l>
-            <l n="71">πατρικὰν γῆρ[υν <gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">at most 12 ll.</note>]</l>
-            <l n="72">πῶς πᾷ τὰ λάθρι[α νύχια <gap reason="lost"/>]</l>
-            <l n="73">κλέμματα ποσσὶ[ <gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">at most 8 ll.</note> ]</l>
-            <l n="74">εἴ πως, ἂν τύχω, πο[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">at most 8 ll.</note>]</l>
-            <l n="75">πατρί τʼ ἐλεύθερον β[<gap reason="lost"/>]<gap reason="lost"/>μετ[<gap reason="lost"/>]</l>
+            <l n="64">ἴθʼ ἄγε δ[<gap reason="lost" />
+               <note anchored="true" place="inline"
+                  xml:lang="eng" resp="ed">at most 16 ll.</note>]</l>
+            <l n="65">πόδα βά[σιν τε<gap reason="lost" />]ν</l>
+            <l n="66">ἀπαπαπ[αῖ <gap reason="lost" />
+               <note anchored="true" place="inline"
+                  xml:lang="eng" resp="ed">at most 15 ll.</note>]</l>
+            <l n="67">ὢ ὤ, σέ τοι [ <gap reason="lost" />
+               <note anchored="true" place="inline"
+                  xml:lang="eng" resp="ed">at most 14 ll.</note>]</l>
+            <l n="68">ἔπιθι κλωπ[ <gap reason="lost" />
+               <note anchored="true" place="inline"
+                  xml:lang="eng" resp="ed">at most 13 ll.</note>]</l>
+            <l n="69">ὑπόνομα κ[ <gap reason="lost" />
+               <note anchored="true" place="inline"
+                  xml:lang="eng" resp="ed">at most 15 ll.</note>]</l>
+            <l n="70">διανύτων ό[ <gap reason="lost" />
+               <note anchored="true" place="inline"
+                  xml:lang="eng" resp="ed">at most 14 ll.</note>]</l>
+            <l n="71">πατρικὰν γῆρ[υν <gap reason="lost" />
+               <note anchored="true" place="inline"
+                  xml:lang="eng" resp="ed">at most 12 ll.</note>]</l>
+            <l n="72">πῶς πᾷ τὰ λάθρι[α νύχια <gap reason="lost" />]</l>
+            <l n="73">κλέμματα ποσσὶ[ <gap reason="lost" />
+               <note anchored="true" place="inline"
+                  xml:lang="eng" resp="ed">at most 8 ll.</note> ]</l>
+            <l n="74">εἴ πως, ἂν τύχω, πο[<gap reason="lost" />
+               <note anchored="true" place="inline"
+                  xml:lang="eng" resp="ed">at most 8 ll.</note>]</l>
+            <l n="75">πατρί τʼ ἐλεύθερον β[<gap reason="lost" />]<gap reason="lost" />μετ[<gap
+                  reason="lost" />]</l>
             <l n="76">ξυνάμα θεὸς ὁ φίλος ἀνέτω</l>
             <l n="77">πόνους, προφήνας ἀρίζηλα</l>
             <l n="78">χρυσοῦ παραδείγματα.
 
             </l>
-         </sp><milestone unit="card" n="79"/>
+         </sp>
+         <milestone unit="card" n="79" />
          <sp>
             <speaker>Σιληνός</speaker>
             <l n="79">θεὸς Τύχη [κ]αὶ δαῖμον ἰθυντήριε,</l>
@@ -243,8 +277,8 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="83">[τ]ῶν εἴ τις ὀπτήρ ἐστι[ν] ἢ κατήκοος,</l>
             <l n="84">[ἐ]μοί τʼ [ἂ]ν [ε]ἴη προσφιλὴ[ς] φράσας τόδε</l>
             <l n="85">[Φοίβῳ τ]ʼ ἄνακτι συντελὴς εὐεργ[έ]της.</l>
-            <l n="86">[<gap reason="lost"/>]α[<gap reason="lost"/>]τ[<gap reason="lost"/>]ς τοῦ λό[γου<gap reason="lost"/>]θʼ ἅμα[
-<milestone n="4" unit="column"/>
+            <l n="86">[<gap reason="lost" />]α[<gap reason="lost" />]τ[<gap reason="lost" />]ς τοῦ
+               λό[γου<gap reason="lost" />]θʼ ἅμα[ <milestone n="4" unit="column" />
             </l>
             <l n="87">μήνυ[τρα</l>
          </sp>
@@ -260,20 +294,21 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="92">ἔοικεν ἤδη κ[</l>
             <l n="93">ἄγʼ εἷα δὴ πᾶς ς[</l>
             <l n="94">ῥινηλατῶν ὀσμ[αῖσι</l>
-            <l n="95">αὔρας ἐάν πῃ πρ[  <gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">at most 15 ll.</note>]</l>
-            <l n="96">διπλοῦς ὀκλάζω[ν <gap reason="lost"/>]ν</l>
-            <l n="97">ὕποσμος ἐν χρῷ [  <gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">at most 15 ll.</note>]</l>
-            <l n="98">οὕτως ἔρευναν καὶ π[<gap reason="lost"/>]</l>
-            <l n="99">ἅπαντα χρηστὰ κα[ὶ <gap reason="lost"/>τε]λεῖν.
-
-            </l>
-         </sp><milestone unit="card" n="100"/>
+            <l n="95">αὔρας ἐάν πῃ πρ[ <gap reason="lost" />
+               <note anchored="true" place="inline"
+                  xml:lang="eng" resp="ed">at most 15 ll.</note>]</l>
+            <l n="96">διπλοῦς ὀκλάζω[ν <gap reason="lost" />]ν</l>
+            <l n="97">ὕποσμος ἐν χρῷ [ <gap reason="lost" />
+               <note anchored="true" place="inline"
+                  xml:lang="eng" resp="ed">at most 15 ll.</note>]</l>
+            <l n="98">οὕτως ἔρευναν καὶ π[<gap reason="lost" />]</l>
+            <l n="99">ἅπαντα χρηστὰ κα[ὶ <gap reason="lost" />τε]λεῖν. </l>
+         </sp>
+         <milestone unit="card" n="100" />
          <sp>
             <speaker>Ἡμιχορός α</speaker>
             <l n="100">θεὸς θεὸς θεὸς θεός· ἔα [ἔα·</l>
-            <l n="101">ἔχειν ἔοιγμεν· ἴσχε, μὴ συρ<gap reason="lost"/>τει.</l>
+            <l n="101">ἔχειν ἔοιγμεν· ἴσχε, μὴ συρ<gap reason="lost" />τει.</l>
          </sp>
          <sp>
             <speaker>Ἡμιχ. β</speaker>
@@ -304,14 +339,14 @@ I think this particular one is a true supplement rather than an unclear letter, 
          <sp>
             <speaker>Ἡμιχ. β</speaker>
             <l n="109">ἄθρει μάλα.</l>
-            <l n="110">αὔτʼ ἐστι τοῦτο μέτρον [ἐ]κμε<gap reason="lost"/>[τρού]μ[ε]νον.</l>
+            <l n="110">αὔτʼ ἐστι τοῦτο μέτρον [ἐ]κμε<gap reason="lost" />[τρού]μ[ε]νον.</l>
          </sp>
          <sp>
             <speaker>Ἡμιχ. α</speaker>
-            <l n="111">χ[ώ]ρει δρόμῳ καὶ τα[<gap reason="lost"/>]ν ἔχου</l>
+            <l n="111">χ[ώ]ρει δρόμῳ καὶ τα[<gap reason="lost" />]ν ἔχου</l>
             <l n="112">
-               <gap reason="lost"/>οπ[<gap reason="lost"/>][<gap reason="lost"/>]μενος
-<milestone n="5" unit="column"/>
+               <gap reason="lost" />οπ[<gap reason="lost" />][<gap reason="lost" />]μενος <milestone
+                  n="5" unit="column" />
             </l>
             <l n="113">ῥοίβδημʼ ἐάν τι τῶν [βοῶν δ]ιʼ οὖς [λάβῃ</l>
          </sp>
@@ -332,7 +367,8 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="123">δεινὸς κυκησμὸς εἶχ[ε τὸν βοη]λάτην.
 
             </l>
-         </sp><milestone unit="card" n="124"/>
+         </sp>
+         <milestone unit="card" n="124" />
          <sp>
             <speaker>Σιληνός</speaker>
             <l n="124">τίνʼ αὖ τέχνην σὺ τήν[δʼ ἄρʼ ἐξ]ῆυρες, τίνʼ αὖ,</l>
@@ -351,8 +387,8 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <speaker>Σιληνός</speaker>
             <l n="132">τ[ί τοῦτʼ ἰύζεις;] τίνα φοβῇ; τίνʼ εἰσορᾷς;</l>
             <l n="133">τ[ί δεῖμʼ ὄπωπ]ας; τί ποτε βακχεύεις ἔχων;</l>
-            <l n="134">α[γχοῦ τις ἤχε]ι κέρχνος·  ἱμείρει[ς] μαθεῖν</l>
-            <l n="135">τ[ίς ἦν;  τί σιγ]ᾶτʼ, ὦ πρ[ὸ τοῦ λαλίστ]ατοι;</l>
+            <l n="134">α[γχοῦ τις ἤχε]ι κέρχνος· ἱμείρει[ς] μαθεῖν</l>
+            <l n="135">τ[ίς ἦν; τί σιγ]ᾶτʼ, ὦ πρ[ὸ τοῦ λαλίστ]ατοι;</l>
          </sp>
          <sp>
             <speaker>Χορός</speaker>
@@ -364,8 +400,7 @@ I think this particular one is a true supplement rather than an unclear letter, 
          </sp>
          <sp>
             <speaker>Χορός</speaker>
-            <l n="138">ἄ[κουε δή.
-<milestone n="6" unit="column"/>
+            <l n="138">ἄ[κουε δή. <milestone n="6" unit="column" />
             </l>
          </sp>
          <sp>
@@ -387,7 +422,8 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="144">ψόφῳ, τὸν οὐδε[ὶ]ς π[ώπο]τʼ ἤκουσεν βροτῶν.
 
             </l>
-         </sp><milestone unit="card" n="145"/>
+         </sp>
+         <milestone unit="card" n="145" />
          <sp>
             <speaker>Σιληνός</speaker>
             <l n="145">τί μοι ψ[ό]φον; φοβ[εῖσθε] κα[ὶ] δειμαίνετε,</l>
@@ -409,8 +445,7 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="161">[ὃν] δὴ φοβεῖσθε παῖδες ὣς πρὶν εἰσιδεῖν,</l>
             <l n="162">πλοῦτον δὲ χ[ρ]υσόφαντον ἐξαφίετε,</l>
             <l n="163">ὃν Φοῖβος ὑμῖν εἶπε κ[ἀ]νεδέξατο,</l>
-            <l n="164">καὶ τὴν ἐλευθέρωσιν ἣν κατῄνεσεν
-<milestone n="7" unit="column"/>
+            <l n="164">καὶ τὴν ἐλευθέρωσιν ἣν κατῄνεσεν <milestone n="7" unit="column" />
             </l>
             <l n="165">ὑμῖν τε κἀμοί· ταῦτʼ ἀφέντες εὕδετε.</l>
             <l n="166">εἰ μὴ ʼνανοστήσαντες ἐξιχνεύσε[τε</l>
@@ -431,7 +466,8 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="175">ἐγὼ δʼ ἐν [ἔ]ργοις παρμένων σʼ ἀπευθυνῶ.
 
             </l>
-         </sp><milestone unit="card" n="176"/>
+         </sp>
+         <milestone unit="card" n="176" />
          <sp>
             <speaker>Χορός</speaker>
             <l n="176">ὗ ὗ ὗ, ψ ψ, ἆ ἆ. λέγʼ ὅ τι πονεῖς.</l>
@@ -440,20 +476,24 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="179">ἐν πρώτῳ τίς ὅδε τροπ[ῳ;</l>
             <l n="180">ἔχει. ἐλήλυθεν, ἐλήλ[υθεν.</l>
             <l n="181">ἐμὸς εἶ, ἀνάγου.</l>
-            <l n="182">δεῦτʼ ὤ, τίς ὅδε [ <gap reason="lost"/> ]της</l>
-            <l n="183">ὁ δράκις, ὁ γράπις, [<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed.">at most 6 ll.</note>]</l>
-            <l n="184">[Ο]ὐρίας Οὐρίας, αδ[<gap reason="lost"/>]κεις</l>
-            <l n="185">παρέβης· μεθυ[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">at most 11 ll.</note>]</l>
-            <l n="186">ὅ τι ποτε φερε[<gap reason="lost"/>]ι[<gap reason="lost"/>]ν</l>
-            <l n="187">ἔποχον ἔχει τι[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">at most 13 ll.</note>]</l>
-            <l n="188">στίβος ὁδενες[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">at most 12 ll.</note> ]</l>
-            <l n="189">στράτιος, στράτ[ιος <gap reason="lost"/>]υ[<gap reason="lost"/>]</l>
-            <l n="190">δεῦρʼ ἕπου· τ[<gap reason="lost"/>]δρ[<gap reason="lost"/>]
-<milestone n="8" unit="column"/>
+            <l n="182">δεῦτʼ ὤ, τίς ὅδε [ <gap reason="lost" /> ]της</l>
+            <l n="183">ὁ δράκις, ὁ γράπις, [<gap reason="lost" />
+               <note anchored="true"
+                  place="inline" xml:lang="eng" resp="ed.">at most 6 ll.</note>]</l>
+            <l n="184">[Ο]ὐρίας Οὐρίας, αδ[<gap reason="lost" />]κεις</l>
+            <l n="185">παρέβης· μεθυ[<gap reason="lost" />
+               <note anchored="true" place="inline"
+                  xml:lang="eng" resp="ed">at most 11 ll.</note>]</l>
+            <l n="186">ὅ τι ποτε φερε[<gap reason="lost" />]ι[<gap reason="lost" />]ν</l>
+            <l n="187">ἔποχον ἔχει τι[<gap reason="lost" />
+               <note anchored="true" place="inline"
+                  xml:lang="eng" resp="ed">at most 13 ll.</note>]</l>
+            <l n="188">στίβος ὁδενες[<gap reason="lost" />
+               <note anchored="true" place="inline"
+                  xml:lang="eng" resp="ed">at most 12 ll.</note> ]</l>
+            <l n="189">στράτιος, στράτ[ιος <gap reason="lost" />]υ[<gap reason="lost" />]</l>
+            <l n="190">δεῦρʼ ἕπου· τ[<gap reason="lost" />]δρ[<gap reason="lost" />] <milestone
+                  n="8" unit="column" />
             </l>
             <l n="191">ἔνι β[ο]ῦς ἔνι πονο[</l>
             <l n="192">μὴ μεθῇ κρ[ο]κι [</l>
@@ -468,9 +508,10 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="201">ἔπ[ι]θʼ [ἔ]πεχʼ εἴσιθʼ ἴθι[</l>
             <l n="202">τ[ὸ] δὲ πλάγιον ἔχομ[εν
 
-            </l></sp>
-         <milestone unit="card" n="203"/>
-               <sp>
+            </l>
+         </sp>
+         <milestone unit="card" n="203" />
+         <sp>
             <l n="203">πάτερ, τί σιγᾷς; μῶν ἀληθ[ὲς εἴπομεν;</l>
             <l n="204">οὐ[κ ε]ἰσακο[ύε]ις; ἦ κεκώφη[σαι, ψόφον;</l>
          </sp>
@@ -484,14 +525,15 @@ I think this particular one is a true supplement rather than an unclear letter, 
          </sp>
          <sp>
             <speaker>Σιληνός</speaker>
-            <l n="205c" part="F">μένʼ, ε[ἰ] <add>δύνᾳ.</add></l>
+            <l n="205c" part="F">μένʼ, ε[ἰ] <add>δύνᾳ.</add>
+            </l>
          </sp>
          <sp>
             <speaker>Χορός</speaker>
             <l n="206">οὐκ ἔστιν. ἀλλʼ αὐτὸς σὺ ταῦθ[ʼ ὅπῃ θέλεις]</l>
             <l n="207">ζήτει τε κἀξίχνευε καὶ πλού[τει λαβὼν</l>
-            <l n="208">τὰς βοῦς τε κα[ὶ] τὸν χρυσὸν [<gap reason="lost"/>   ]ε[</l>
-            <l n="209">μὴ πλεῖστ[ον] ἔτι ς[<gap reason="lost"/>]ν [<gap reason="lost"/>] χρόνον.</l>
+            <l n="208">τὰς βοῦς τε κα[ὶ] τὸν χρυσὸν [<gap reason="lost" /> ]ε[</l>
+            <l n="209">μὴ πλεῖστ[ον] ἔτι ς[<gap reason="lost" />]ν [<gap reason="lost" />] χρόνον.</l>
          </sp>
          <sp>
             <speaker>Σιληνός</speaker>
@@ -502,9 +544,9 @@ I think this particular one is a true supplement rather than an unclear letter, 
          <sp>
             <speaker>Χορός</speaker>
             <l n="213">ἶὼ γ[</l>
-            <l n="214">φθέγ[μα <gap reason="lost"/>]ου</l>
-            <l n="215">[<gap reason="lost"/>]ηδ[<gap reason="lost"/> μισ-]
-<milestone n="9" unit="column"/>
+            <l n="214">φθέγ[μα <gap reason="lost" />]ου</l>
+            <l n="215">[<gap reason="lost" />]ηδ[<gap reason="lost" /> μισ-] <milestone n="9"
+                  unit="column" />
             </l>
             <l n="216">θο[ν δ]όμοισιν ὀλβίσῃς.</l>
             <l n="217">ὁ [δʼ ο]ὐ φαν[εῖτ]αι τοῖσιν. ἀλλʼ ἐγὼ τάχα</l>
@@ -512,8 +554,8 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="219">π[η]δήμασιν κραιπνοῖσι καὶ λακτίσμασιν</l>
             <l n="220">ὥ[ς]τʼ εἰσακοῦσαι κεἰ λίαν κωφός τις ᾖ.
             </l>
-         </sp><milestone unit="card" n="221"/>
-
+         </sp>
+         <milestone unit="card" n="221" />
          <sp>
             <speaker>Κυλλήνη</speaker>
             <l n="221">θῆρες, τί [τό]νδε χλοερὸν ὑλώδη πάγον</l>
@@ -528,23 +570,25 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="230">μανιῶν στρέφουσι; θαῦμα γὰρ κατέκλ[υ]ον</l>
             <l n="231">ὁμοῦ πρέπον κέλευμά πως κυνηγετ[ῶ]ν</l>
             <l n="232">ἐγγὺς μολόντων θηρὸς εὐναί[ου] τρο[φ]ῆς,</l>
-            <l n="233">ὁμοῦ δʼ ἂν αὖτι[ς <gap reason="lost"/>] <gap reason="lost"/>αι φωρ[<gap reason="lost"/>
+            <l n="233">ὁμοῦ δʼ ἂν αὖτι[ς <gap reason="lost" />] <gap reason="lost" />αι φωρ[<gap
+                  reason="lost" />
             </l>
-            <l n="234">γλώσσης ἐτεινε[τʼ ε]ἰς κλοπὴν [<gap reason="lost"/>]έναι·</l>
-            <l n="235">αὖτις δʼ α[<gap reason="lost"/>]τ[ <gap reason="lost"/>]<gap reason="lost"/> μενων [<gap reason="lost"/>]α</l>
-            <l n="236">κηρυκ[<gap reason="lost"/>]<gap reason="lost"/>ι[<gap reason="lost"/>] κηρυγμα [</l>
+            <l n="234">γλώσσης ἐτεινε[τʼ ε]ἰς κλοπὴν [<gap reason="lost" />]έναι·</l>
+            <l n="235">αὖτις δʼ α[<gap reason="lost" />]τ[ <gap reason="lost" />]<gap reason="lost" />
+               μενων [<gap reason="lost" />]α</l>
+            <l n="236">κηρυκ[<gap reason="lost" />]<gap reason="lost" />ι[<gap reason="lost" />]
+               κηρυγμα [</l>
             <l n="237">καὶ τ[α]ῦτʼ ἀφεῖσα σὺν ποδῶν λακ[τίσμασι</l>
             <l n="238">[κ]ληδὼν ὁμοῦ πάμφυρ[τ]ʼ ἐγειτν[ία στέγῃ]</l>
-            <l n="239">[καὶ] ταῦτʼ ἂν ἄλλως ἢ κλ[<gap reason="lost"/>]μ[</l>
+            <l n="239">[καὶ] ταῦτʼ ἂν ἄλλως ἢ κλ[<gap reason="lost" />]μ[</l>
             <l n="240">[φων]ῶν ἀκο[ύ]σασʼ ὧδε παραπεπαισμέν[ων</l>
             <l n="241">
-               <gap reason="lost"/>φ[<gap reason="lost"/>]η[<gap reason="lost"/>] νων ὑμᾶς νοσεῖν</l>
-            <l n="242">νο[ς <gap reason="lost"/>τί νύμφη]ν ἔτι ποε͂ιτʼ ἀναιτίαν;
-<milestone n="10" unit="column"/>
-               
+               <gap reason="lost" />φ[<gap reason="lost" />]η[<gap reason="lost" />] νων ὑμᾶς νοσεῖν</l>
+            <l n="242">νο[ς <gap reason="lost" />τί νύμφη]ν ἔτι ποε͂ιτʼ ἀναιτίαν; <milestone n="10"
+                  unit="column" />
             </l>
          </sp>
-         <milestone unit="card" n="243"/>
+         <milestone unit="card" n="243" />
          <sp>
             <speaker>Χορός</speaker>
             <note anchored="true" type="meter" place="inline">στρ.</note>
@@ -559,7 +603,7 @@ I think this particular one is a true supplement rather than an unclear letter, 
 
             </l>
          </sp>
-         <milestone unit="card" n="251"/>
+         <milestone unit="card" n="251" />
          <sp>
             <speaker>Κυλλήνη</speaker>
             <l n="251">ταῦτʼ ἔστʼ ἐκείνων νῦν [ τρόπων πεπαίτερα,</l>
@@ -585,11 +629,11 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="265">καὶ γὰρ κέκρυπτ[αι] τοὖργον ἐν [θ]ε[ῶ]ν ἕδραις,</l>
             <l n="266">Ἥραν ὅπως μ[ὴ πύ]στ[ι]ς ἵξετα[ι] λόγου.</l>
             <l n="267">Ζ[εὺ]ς γ[ὰρ] κρυφ[αίαν ἐς στέ]γην Ἀτλαντίδος</l>
-            <l n="268">[<gap reason="lost"/>]εύσατο·</l>
-            <l n="269">[<gap reason="lost"/>]υ [<gap reason="lost"/>]φιλας
-<milestone n="11" unit="column"/>
+            <l n="268">[<gap reason="lost" />]εύσατο·</l>
+            <l n="269">[<gap reason="lost" />]υ [<gap reason="lost" />]φιλας <milestone n="11"
+                  unit="column" />
             </l>
-            <l n="270">[<gap reason="lost"/>] λήθῃ τῆς βαθυζώνου θεᾶς</l>
+            <l n="270">[<gap reason="lost" />] λήθῃ τῆς βαθυζώνου θεᾶς</l>
             <l n="271">[κατὰ σπέ]ος δὲ παῖδʼ ἐφίτυσεν μόνον·</l>
             <l n="272">[τοῦτον δὲ] χερσὶ ταῖς ἐμαῖς ἐγὼ τρέφω·</l>
             <l n="273">[μητρὸς γ]ὰρ ἰσχὺς ἐν νόσῳ χειμάζεται·</l>
@@ -603,7 +647,7 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="281">[κἀξορ]μενίζει κοὐκέτι σχολάζεται</l>
             <l n="282">[βλάστη·] τοιόνδε παῖδα θησαυρὸς στέγει.</l>
             <l n="283">[δυσεύρε]τός [τʼ ἔτʼ] ἐστι τοῦ πατρὸς θέσει.</l>
-            <l n="284">[ἀφανεῖ δʼ ὃ πεύθῃ  φ]θέγμα μηχανῇ βρέμ[ον</l>
+            <l n="284">[ἀφανεῖ δʼ ὃ πεύθῃ φ]θέγμα μηχανῇ βρέμ[ον</l>
             <l n="285">καὶ π[όλ]λʼ ἐθά]μβεις αὐτὸ]ς, ἡμέρᾳ μιᾳ</l>
             <l n="286">ἐξ ὑπτίας κ[ίστη γʼ ἐμηχ]ανήσατο·</l>
             <l n="287">τοιόνδε θη[ρὸς ἐκ θανόντ]ος ἡδονῆς</l>
@@ -611,23 +655,22 @@ I think this particular one is a true supplement rather than an unclear letter, 
 
             </l>
          </sp>
-         <milestone unit="card" n="290"/>
+         <milestone unit="card" n="290" />
          <sp>
             <speaker>Χορός</speaker>
-            <l n="290">ἄφραστ[ο  <gap reason="lost"/>] παῖς βοῆς</l>
-            <l n="291">παιδο[<gap reason="lost"/>]μαζεις[</l>
-            <l n="292">θηρευμ[α <gap reason="lost"/> ]λέγεις</l>
-            <l n="293">φώνημ[α <gap reason="lost"/> ]σεθου[</l>
-            <l n="294">τόνδʼ αφ[<gap reason="lost"/> ]ον[</l>
-            <l n="295">τως ἐξεφ[<gap reason="lost"/>      ]</l>
-            <l n="296">ροντʼ ἄπα[ <gap reason="lost"/> ] ἐ[κ θανόν-
-<milestone n="12" unit="column"/>
+            <l n="290">ἄφραστ[ο <gap reason="lost" />] παῖς βοῆς</l>
+            <l n="291">παιδο[<gap reason="lost" />]μαζεις[</l>
+            <l n="292">θηρευμ[α <gap reason="lost" /> ]λέγεις</l>
+            <l n="293">φώνημ[α <gap reason="lost" /> ]σεθου[</l>
+            <l n="294">τόνδʼ αφ[<gap reason="lost" /> ]ον[</l>
+            <l n="295">τως ἐξεφ[<gap reason="lost" /> ]</l>
+            <l n="296">ροντʼ ἄπα[ <gap reason="lost" /> ] ἐ[κ θανόν- <milestone n="12" unit="column" />
             </l>
             <l n="297">τος πορίζειν τοιάνδε γῆρυν.
 
             </l>
-         </sp> 
-            <milestone unit="card" n="298"/>
+         </sp>
+         <milestone unit="card" n="298" />
          <sp>
             <speaker>Κυλλήνη</speaker>
             <l n="298">μὴ νῦν ἀπίστει· πιστὰ γάρ σε προσγελᾷ θεᾶς ἔπη.</l>
@@ -678,11 +721,12 @@ I think this particular one is a true supplement rather than an unclear letter, 
          </sp>
          <sp>
             <speaker>Κυλλήνη</speaker>
-            <l n="311"> [<gap reason="lost"/>]λο[<gap reason="lost"/>φ]ορίνη σύγγονος τῶν ὀστράκων.</l>
+            <l n="311"> [<gap reason="lost" />]λο[<gap reason="lost" />φ]ορίνη σύγγονος τῶν
+               ὀστράκων.</l>
          </sp>
          <sp>
             <speaker>Χορός</speaker>
-            <l n="312">[ποῖον δὲ τοὔνομʼ ἐν]νέ[πει]ς;  πόρσυνον, εἴ τι πλέον ἔχεις.</l>
+            <l n="312">[ποῖον δὲ τοὔνομʼ ἐν]νέ[πει]ς; πόρσυνον, εἴ τι πλέον ἔχεις.</l>
          </sp>
          <sp>
             <speaker>Κυλλήνη</speaker>
@@ -690,30 +734,39 @@ I think this particular one is a true supplement rather than an unclear letter, 
          </sp>
          <sp>
             <speaker>Χορός</speaker>
-            <l n="314">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 22 ll.</note>] κτέανον ησύ[<gap reason="lost"/>] τινι;</l>
+            <l n="314">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 22 ll.</note>] κτέανον ησύ[<gap reason="lost" />] τινι;</l>
          </sp>
          <sp>
             <speaker>Κυλλήνη</speaker>
-            <l n="314b">[ <gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 23 ll.</note>] δέρμα κ[<gap reason="lost"/>]στ [</l>
-            <l n="315">[ <gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 23 ll.</note> ]ον ὧδ[ε] κλαγγάνει [</l>
-            <l n="316">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 23 ll.</note>]όρως ἐρείδεται</l>
-            <l n="317">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 24 ll.</note>]πλεκτα [</l>
-            <l n="318">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 24 ll.</note>]λάδος κ[</l>
-            <l n="319">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 21 ll.</note> κόλ]λοπες δε[</l>
-            <l n="320">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 24 ll.</note> ]αμματω [</l>
-            <l n="321">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 25 ll.</note>]ον[</l>
+            <l n="314b">[ <gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 23 ll.</note>] δέρμα κ[<gap reason="lost" />]στ [</l>
+            <l n="315">[ <gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 23 ll.</note> ]ον ὧδ[ε] κλαγγάνει [</l>
+            <l n="316">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 23 ll.</note>]όρως ἐρείδεται</l>
+            <l n="317">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 24 ll.</note>]πλεκτα [</l>
+            <l n="318">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 24 ll.</note>]λάδος κ[</l>
+            <l n="319">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 21 ll.</note> κόλ]λοπες δε[</l>
+            <l n="320">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 24 ll.</note> ]αμματω [</l>
+            <l n="321">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 25 ll.</note>]ον[</l>
             <l n="322">
                <note anchored="true" place="inline" xml:lang="eng" resp="ed">1 or 2 lines lost</note>
-               <milestone n="13" unit="column"/>
+               <milestone n="13" unit="column" />
             </l>
             <l n="325">καὶ τοῦτο λύπη[ς] ἔστʼ ἄκεστρον καὶ παραψυκ[τ]ήρ[ιο]ν</l>
             <l n="326">κείνῳ μόνον, χα[ί]ρει δʼ ἀλύων καί τι προσφων[ῶν μέλος</l>
@@ -722,10 +775,11 @@ I think this particular one is a true supplement rather than an unclear letter, 
 
             </l>
          </sp>
-         <milestone unit="card" n="329"/>
+         <milestone unit="card" n="329" />
          <sp>
             <speaker>Χορός</speaker>
-            <l n="329">ὀ<add>ρθ</add>οψάλακτός τις ὀμφὴ κατοιχνεῖ τόπου, <note anchored="true" type="meter" place="inline">στρ.</note>
+            <l n="329">ὀ<add>ρθ</add>οψάλακτός τις ὀμφὴ κατοιχνεῖ τόπου, <note anchored="true"
+                  type="meter" place="inline">στρ.</note>
             </l>
             <l n="330">πρεπτὰ <add>δʼ αὖ</add> διὰ τόνου φάσματʼ ἔγ-</l>
             <l n="331">χωρʼ ἐπανθεμίζει.</l>
@@ -734,11 +788,9 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="334">ταῦτʼ ἐτεχνήσατʼ, οὐκ ἄλλος ἐστὶν κλ[οπεὺς</l>
             <l n="335">ἀντʼ ἐκείνου, γύναι, σάφʼ ἴσθι.</l>
             <l n="336">σὺ δʼ ἀντὶ τῶνδε μὴ χαλε-</l>
-            <l n="337">φθῇς μ<add>η</add>δὲ δυσφορηθῇς.
-
-            </l>
+            <l n="337">φθῇς μ<add>η</add>δὲ δυσφορηθῇς. </l>
          </sp>
-         <milestone unit="card" n="338"/>
+         <milestone unit="card" n="338" />
          <sp>
             <speaker>Κυλλήνη</speaker>
             <l n="338">[τίς ἔχει πλά]νη σε; τίνα κλοπὴν ὠνείδις[ας;</l>
@@ -753,43 +805,53 @@ I think this particular one is a true supplement rather than an unclear letter, 
          </sp>
          <sp>
             <speaker>Χορός</speaker>
-            <l n="341">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 17 ll.</note> ]αν αὐτῇ τῇ κλο[πῇ.</l>
+            <l n="341">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 17 ll.</note> ]αν αὐτῇ τῇ κλο[πῇ.</l>
          </sp>
          <sp>
             <speaker>Κυλλήνη</speaker>
-            <l n="342">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 18 ll.</note> ε]ἴ γε τἀληθῆ λέ[γεις.</l>
+            <l n="342">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 18 ll.</note> ε]ἴ γε τἀληθῆ λέ[γεις.</l>
          </sp>
          <sp>
             <speaker>Χορός</speaker>
-            <l n="343">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 18 ll.</note> τ]ἀληθῆ λέγ[ω.</l>
-            <l n="344">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 14 ll.</note>  κεκλο]φεναισαφ[</l>
-            <l n="345">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 19 ll.</note>]δε βοῦς πάνυ</l>
-            <l n="346">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 19 ll.</note>]ᾳ καθήρ[μ]ο[σε</l>
-            <l n="347">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 19 ll.</note>]λου τεμὼν</l>
-            <l n="348">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 20 ll.</note>]φο <gap reason="lost"/> δ[ο]ρα[</l>
+            <l n="343">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 18 ll.</note> τ]ἀληθῆ λέγ[ω.</l>
+            <l n="344">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 14 ll.</note> κεκλο]φεναισαφ[</l>
+            <l n="345">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 19 ll.</note>]δε βοῦς πάνυ</l>
+            <l n="346">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 19 ll.</note>]ᾳ καθήρ[μ]ο[σε</l>
+            <l n="347">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 19 ll.</note>]λου τεμὼν</l>
+            <l n="348">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 20 ll.</note>]φο <gap reason="lost" /> δ[ο]ρα[</l>
             <l n="349">
                <note anchored="true" place="inline" xml:lang="eng" resp="ed">2 or 3 lines lost</note>
-               <milestone n="14" unit="column"/>
-               
+               <milestone n="14" unit="column" />
             </l>
          </sp>
-            <milestone unit="card" n="352"/>
+         <milestone unit="card" n="352" />
          <sp>
             <speaker>κυλλήνη</speaker>
-            <l n="352">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 11 ll.</note>   ] ἄρτι μανθάνω χρόνῳ</l>
-            <l n="353">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 8 ll.</note>   ἐγχ]άσκοντα τῇ ʼμῇ μωρίᾳ</l>
-            <l n="354">[<gap reason="lost"/>
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed">about 11 ll.</note>   ο]ὐδέν, ἀλλὰ παιδιᾶς χάριν.</l>
+            <l n="352">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 11 ll.</note> ] ἄρτι μανθάνω χρόνῳ</l>
+            <l n="353">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 8 ll.</note> ἐγχ]άσκοντα τῇ ʼμῇ μωρίᾳ</l>
+            <l n="354">[<gap reason="lost" />
+               <note anchored="true" place="inline" xml:lang="eng"
+                  resp="ed">about 11 ll.</note> ο]ὐδέν, ἀλλὰ παιδιᾶς χάριν.</l>
             <l n="355">[σὺ δʼ οὖν τὸ λοιπ̀ο]ν εἰς ἔμʼ εὐδίαν ἔχων,</l>
             <l n="356">[εἴ σοι φέρει χάρ]μʼ ἤ τι κερδαίνειν δοκεῖς</l>
             <l n="357">[ὄπως θέλεις κά]χαζε καὶ τέρπου φρένα·</l>
@@ -798,34 +860,35 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <l n="360">[οὗτος γὰρ οὔτε] πρὸς πατρὸς κλέπτης ἔφυ</l>
             <l n="361">[οὔτʼ αὖτις ἐν μ]ήτρωσιν ἡ κλοπὴ κρατεῖ.</l>
             <l n="362">[εἰ δὴ κλοπή τ]ίς ἐστι, τὸν κλέπτην σκόπει</l>
-            <l n="363">[ἄπορον ἄ]καρπον·  τοῦδε δʼ οὐ π<add>ει</add>ν<add>ῇ</add> δόμος.</l>
+            <l n="363">[ἄπορον ἄ]καρπον· τοῦδε δʼ οὐ π<add>ει</add>ν<add>ῇ</add> δόμος.</l>
             <l n="364">[ἄθρ]ει γένος πρόσαπτε τὴν πονηρίαν</l>
             <l n="365">[πρὸ]ς ὅντινʼ ἥκει· τῷδε δʼ οὐχ οὕτω πρέπει.</l>
             <l n="366">ἀ[λλʼ] αἰὲν εἶ σὺ παῖς· νέος γὰρ ὢν ἀνὴρ</l>
             <l n="367">π[ώγ]ωνι θάλλων ὡς τράγος κνήκῳ χλιδᾷς.</l>
             <l n="368">παύου τὸ λεῖον φαλακρὸν ἡδονῇ πιτνάς.</l>
             <l n="369">[ο]ὐκ ἐκ θεῶν τὰ μῶρα καὶ γέλοια χρὴ</l>
-            <l n="370">[χ]ανόντα κλαίειν ὕστερʼ;  ὡς ἐγὼ <add>λ</add>έ<add>γ</add>ω.
-
-            </l>
-         </sp><milestone unit="card" n="371"/>
+            <l n="370">[χ]ανόντα κλαίειν ὕστερʼ; ὡς ἐγὼ <add>λ</add>έ<add>γ</add>ω. </l>
+         </sp>
+         <milestone unit="card" n="371" />
          <sp>
             <speaker>Χορός</speaker>
-            <l n="371">στρέφου λυγίζου τε μύθοις, ὁποι-  <note anchored="true" type="meter" place="inline">ἀντ.</note>
+            <l n="371">στρέφου λυγίζου τε μύθοις, ὁποι- <note anchored="true" type="meter"
+                  place="inline">ἀντ.</note>
             </l>
             <l n="372">´άν θέλεις βάξιν εὕρισκʼ ἀπό-</l>
             <l n="373">ψηκτον· οὐ γάρ με ταῦτα πείσεις,</l>
-            <l n="374"><add>ὅ</add>πως τὸ χρῆμʼ οὗτος εἰργασμένος</l>
+            <l n="374">
+               <add>ὅ</add>πως τὸ χρῆμʼ οὗτος εἰργασμένος</l>
             <l n="375">ῥινοκόλλητον ἄλλων ἔκλεψεν βοῶν </l>
             <l n="376">που δοράς [ ἢ] ʼπὸ τῶν Λοξίου.</l>
-            <l n="377">[μ]ή με τᾶ[σδʼ ἐ]ξ ὁδοῦ βίβαζε.
-<milestone n="15" unit="column"/>
-               
+            <l n="377">[μ]ή με τᾶ[σδʼ ἐ]ξ ὁδοῦ βίβαζε. <milestone n="15" unit="column" />
             </l>
             <l n="378">
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed.">one or more lines missing</note>
+               <note anchored="true" place="inline" xml:lang="eng" resp="ed.">one or more lines
+                  missing</note>
             </l>
-         </sp><milestone unit="card" n="379"/>
+         </sp>
+         <milestone unit="card" n="379" />
          <sp>
             <speaker>Χορός</speaker>
             <l n="379">[ὁ Ζ]εὺς γὰρ ]</l>
@@ -850,7 +913,8 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <speaker>Κυλλήνη</speaker>
             <l n="384">[ο]ὐ μὴ ταδʼ [εἴπῃς</l>
             <l n="385">
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed.">about 8 lines of which we have only the initial letters</note>
+               <note anchored="true" place="inline" xml:lang="eng" resp="ed.">about 8 lines of which
+                  we have only the initial letters</note>
             </l>
          </sp>
          <sp>
@@ -883,12 +947,13 @@ I think this particular one is a true supplement rather than an unclear letter, 
          </sp>
          <sp>
             <speaker>Χορός</speaker>
-            <l n="402">[<gap reason="lost"/>]λεισεπ[<gap reason="lost"/>]υ[<gap reason="lost"/> ἐ]ξελαυν[
-<milestone n="16" unit="column"/>
+            <l n="402">[<gap reason="lost" />]λεισεπ[<gap reason="lost" />]υ[<gap reason="lost" />
+               ἐ]ξελαυν[ <milestone n="16" unit="column" />
             </l>
             <l n="403">
-               <note anchored="true" place="inline" xml:lang="eng" resp="ed.">one whole column is missing, perhaps more</note>
-               <milestone n="17" unit="column"/>
+               <note anchored="true" place="inline" xml:lang="eng" resp="ed.">one whole column is
+                  missing, perhaps more</note>
+               <milestone n="17" unit="column" />
             </l>
          </sp>
          <sp>
@@ -910,8 +975,8 @@ I think this particular one is a true supplement rather than an unclear letter, 
          </sp>
          <sp>
             <speaker>Ἀπόλλων</speaker>
-            <l n="412">[<gap reason="lost"/>]νυ[</l>
-            <l n="413">ε[<gap reason="lost"/>]ει[</l>
+            <l n="412">[<gap reason="lost" />]νυ[</l>
+            <l n="413">ε[<gap reason="lost" />]ει[</l>
             <l n="414">βο[</l>
             <l n="415">οπο[</l>
             <l n="416">πρ[</l>
@@ -922,8 +987,6 @@ I think this particular one is a true supplement rather than an unclear letter, 
             <speaker>Σιληνός</speaker>
             <l n="419">τὸν ἐγ[</l>
          </sp>
-         </div>
-         
       </body>
    </text>
 </TEI>

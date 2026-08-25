@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-model href="https://raw.githubusercontent.com/PerseusDLCode/perseus-schemas/main/perseus_prose.rng" schematypens="http://relaxng.org/ns/structure/1.0"?><TEI xmlns="http://www.tei-c.org/ns/1.0">
    <teiHeader xml:lang="eng">
       <fileDesc>
          <titleStmt>
@@ -21,9 +20,9 @@
             <pubPlace>Medford, MA</pubPlace>
             <authority>Perseus Project</authority>
             <date type="release" when="2003-12-05">Perseus 3.0</date>
-            <idno type="filename">tlg0551.tlg005.perseus-grc2.xml</idno>   
+            <idno type="filename">tlg0551.tlg005.perseus-grc2.xml</idno>
+            <idno type="CTS">urn:cts:greekLit:tlg0551.tlg005.perseus-grc2</idno>
          </publicationStmt>
-
          <sourceDesc>
             <biblStruct>
                <monogr>
@@ -35,55 +34,54 @@
                      <publisher>Teubner</publisher>
                      <date>1879</date>
                   </imprint>
-                  <biblScope unit="volume">1</biblScope>                  
+                  <biblScope unit="volume">1</biblScope>
                </monogr>
                <ref target="https://hdl.handle.net/2027/hvd.hxjtm3?urlappend=%3Bseq=76">HathiTrust</ref>
             </biblStruct>
          </sourceDesc>
       </fileDesc>
-
       <encodingDesc>
          <refsDecl n="CTS">
-            <cRefPattern n="fragment" matchPattern="(\w+)" replacementPattern="#xpath(/tei:TEI/tei:text/tei:body/tei:div/tei:div[@n='$1'])">
-               <p>This pointer pattern extracts fragmentary quote.</p>
-            </cRefPattern>
+            <citeStructure match="/TEI/text/body" use="@xml:base">
+               <citeStructure unit="fragment" delim="." match=".//div[@type='textpart'][@subtype='fragment']" use="@n"/>
+            </citeStructure>
          </refsDecl>
-        </encodingDesc>
+      <refsDecl xml:id="CTS"><citeStructure match="/TEI/text/body" use="@xml:base"><citeStructure unit="fragment" delim=":" match="div[@type='fragment']" use="@n"/></citeStructure></refsDecl></encodingDesc>
       <profileDesc>
+         <textClass>
+            <catRef scheme="#perseus-genre" target="#prose-fragment"/>
+         </textClass>
          <langUsage>
             <language ident="grc">Greek</language>
             <language ident="eng">English</language>
             <language ident="lat">Latin</language>
          </langUsage>
       </profileDesc>
-
-     <revisionDesc>
-        <change when="2025-11-20" who="Lisa Cerrato">header review and regularization; updates to encoding and structure to align with current best practices</change>
-        <change when="2015-12-29" who="TDBuck">P4 to P5</change>
-        <change when="2014-08-01" who="Stella Dee">edited markup</change>
-        <change when="2014-07-01" who="Stella Dee">split composite text and converted to unicode</change>
-        <change when="2011-10-28" who="lcerrato"> fixed bad bibl refs</change>
-        <change when="2011-01-13" who="gcrane"> more refinements making these files SDL compatible</change>
-        <change when="2011-01-01" who="gcrane"> small fixes</change>
-        <change when="2011-01-01" who="gcrane"> common nouns have been lower cased</change>
-        <change when="2011-01-01" who="gcrane"> Q and SP tags added</change>
-        <change when="2009-10-07" who="rsingh04"> began reorganizing texts module by collection. created separate work directory in texts module to keep hopper files separate from in progress files </change>
-        <change when="2007-01-03" who="packel"> some cleanup on Numantine Affairs</change>
-        <change when="2005-01-18" who="packel"> fixed accents/breathings on capital letters </change>
-        <change when="2004-08-10" who="amahoney"> fix the XML files so they are valid, make the SGML obsolete so no one is confused </change>
-        <change when="2002-12-06" who="DMM">markup</change>  
-     </revisionDesc>
-  </teiHeader>
-   
-  <text>
-      <body>
-         <div xml:lang="grc" type="edition" n="urn:cts:greekLit:tlg0551.tlg005.perseus-grc2">
-            <head>ἐκ τῆς Κελτῖκης</head>
-
-               <div n="I" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>
-                        <milestone n="1" unit="section"/>Κελτοὶ Ῥωμαίοις ἐπεχείρησαν
+      <revisionDesc>
+         <change when="2025-11-20" who="Lisa Cerrato">header review and regularization; updates to encoding and structure to align with current best practices</change>
+         <change when="2015-12-29" who="TDBuck">P4 to P5</change>
+         <change when="2014-08-01" who="Stella Dee">edited markup</change>
+         <change when="2014-07-01" who="Stella Dee">split composite text and converted to unicode</change>
+         <change when="2011-10-28" who="lcerrato"> fixed bad bibl refs</change>
+         <change when="2011-01-13" who="gcrane"> more refinements making these files SDL compatible</change>
+         <change when="2011-01-01" who="gcrane"> small fixes</change>
+         <change when="2011-01-01" who="gcrane"> common nouns have been lower cased</change>
+         <change when="2011-01-01" who="gcrane"> Q and SP tags added</change>
+         <change when="2009-10-07" who="rsingh04"> began reorganizing texts module by collection. created separate work directory in texts module to keep hopper files separate from in progress files </change>
+         <change when="2007-01-03" who="packel"> some cleanup on Numantine Affairs</change>
+         <change when="2005-01-18" who="packel"> fixed accents/breathings on capital letters </change>
+         <change when="2004-08-10" who="amahoney"> fix the XML files so they are valid, make the SGML obsolete so no one is confused </change>
+         <change when="2002-12-06" who="DMM">markup</change>
+      </revisionDesc>
+   </teiHeader>
+   <text>
+      <body xml:base="urn:cts:greekLit:tlg0551.tlg005.perseus-grc2">
+         <head>ἐκ τῆς Κελτῖκης</head>
+         <div n="I" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>
+                     <milestone n="1" unit="section"/>Κελτοὶ Ῥωμαίοις ἐπεχείρησαν
               πρῶτοι, καὶ τὴν Ῥώμην εἷλον ἄνευ τοῦ Καπιτωλίου, καὶ ἐμπεπρήκασιν. Κάμιλλος δὲ αὐτοὺς
               ἐνίκησε καὶ ἐξήλασε, καὶ μετὰ χρόνον ἐπελθόντας αὖθις ἐνίκησε, καὶ ἐθριάμβευσεν ἀπʼ
               αὐτῶν ὀγδοήκοντα γεγονὼς ἔτη. καὶ τρίτη δὲ Κελτῶν στρατιὰ ἐμβέβληκεν ἐς τὴν Ἰταλίαν,
@@ -98,8 +96,8 @@
               ὑσσούς, ξύλου τετραγώνου τὸ ἥμισυ, καὶ τὸ ἄλλο σιδήρου, τετραγώνου καὶ τοῦδε καὶ
               μαλακοῦ χωρίς γε τῆς αἰχμῆς. καὶ οἱ Βοιοὶ οὖν ὑπὸ Ῥωμαίων τότε ἐφθάρησαν
               πανστρατιᾷ.</p>
-                     <p>
-                        <milestone n="2" unit="section"/>ἄλλους δὲ πάλιν Κελτοὺς ἐνίκα Ποπίλλιος, καὶ μετʼ
+                  <p>
+                     <milestone n="2" unit="section"/>ἄλλους δὲ πάλιν Κελτοὺς ἐνίκα Ποπίλλιος, καὶ μετʼ
               ἐκεῖνον τοὺς αὐτοὺς Κάμιλλος ὁ τοῦ Καμίλλου υἱός. ἔστησε δὲ κατὰ Κελτῶν καὶ Πάππος
               Αἰμίλιος τρόπαια. πρὸ δὲ τῶν τοῦ Μαρίου ὑπατειῶν πλεῖστόν τι καὶ μαχιμώτατον, τῇ τε
               ἡλικίᾳ μάλιστα φοβερώτατον χρῆμα Κελτῶν ἐς τὴν Ἰταλίαν τε καὶ Γαλατίαν ἐσέβαλε, καί
@@ -115,8 +113,8 @@
               πιεζόμενος ὑπὸ τραύματος ὑπογυίου, καὶ τὰ τάγματα ἐπιὼν καὶ παραθαρρύνων, καὶ διδάσκων
               ὅπως τοῖς βαρβάροις πολεμητέον, τὰ μὲν ἐπʼ ἀπήνης φερόμενος, τὰ δὲ καὶ βάδην
               χειραγωγούμενος.</p>
-                     <p>
-                        <milestone n="3" unit="section"/>Καῖσαρ δὲ πολεμήσας αὐτοῖς πρῶτον μὲν Ἑλουητίους καὶ
+                  <p>
+                     <milestone n="3" unit="section"/>Καῖσαρ δὲ πολεμήσας αὐτοῖς πρῶτον μὲν Ἑλουητίους καὶ
               Τιγυρίους ἀμφὶ τὰς εἴκοσι μυριάδας ὄντας ἐνίκησεν. οἱ Τιγύριοι δʼ αὐτῶν χρόνῳ
               ἔμπροσθεν Πίσωνος καὶ Κασσίου τινὰ στρατὸν ἑλόντες ὑπὸ ζυγὸν ἐξεπεπόμφεσαν, ὡς ἐν
               χρονικαῖς συντάξεσι δοκεῖ Παύλῳ τῷ Κλαυδίῳ. τοὺς μὲν οὖν Τιγυρίους ὑποστράτηγος αὐτοῦ
@@ -129,8 +127,8 @@
               ἡσσῶντο. οἱ μὲν γὰρ μετὰ ὁρμῆς βαρυτάτης ἐπεπήδων αὐτοῖς, καὶ ὅλην ὁμοῦ τὴν φάλαγγα
               ἀνεώθουν· Ῥωμαῖοι δʼ ὑπέμενον ἐν τάξει, καὶ κατεστρατήγουν αὐτούς, καὶ ὀκτακισμυρίους
               αὐτῶν τελευτῶντες ἀπέκτειναν.</p>
-                     <p>
-                        <milestone n="4" unit="section"/>μετὰ τούτους ὁ Καῖσαρ τοῖς καλουμένοις Βέλγαις
+                  <p>
+                     <milestone n="4" unit="section"/>μετὰ τούτους ὁ Καῖσαρ τοῖς καλουμένοις Βέλγαις
               ἐπιπεσὼν ποταμόν τινα περῶσι, τοσούτους ἀπέκτεινεν ὡς τὸν ποταμὸν γεφυρωθέντα τοῖς
               σώμασι περᾶσαι. Νέρβιοι δὲ αὐτὸν ἐτρέψαντο, ἄρτι στρατόπεδον ἐξ ὁδοιπορίας
               κατασκευάζοντι αἰφνιδίως ἐπιπεσόντες, καὶ παμπόλλους ἐφόνευσαν, τοὺς δὲ ταξιάρχας καὶ
@@ -141,18 +139,20 @@
               καὶ ἀστράτευτοι, συνεκόπησαν. Σούκαμβροι δὲ πεντακοσίοις ἱππεῦσι τοὺς πεντακισχιλίους
               ἱππεῖς τοῦ Καίσαρος ἔτρεψαν, ἐξαίφνης ἐπιπεσόντες, καὶ δίκην ἔδοσαν ἡττηθέντες μετὰ
               ταῦτα.</p>
-                     <p>
-                        <milestone n="5" unit="section"/>ἐπέρασε καὶ τὸν Ῥῆνον πρῶτος Ῥωμαίων ὁ Καῖσαρ, καὶ
+                  <p>
+                     <milestone n="5" unit="section"/>ἐπέρασε καὶ τὸν Ῥῆνον πρῶτος Ῥωμαίων ὁ Καῖσαρ, καὶ
               ἐς τὴν Βρεττανίδα νῆσον, ἠπείρου τε μείζονα οὖσαν μεγίστης καὶ τοῖς τῇδε ἀνθρώποις
               ἄγνωστον ἔτι. ἐπέρασε δὲ κατὰ τὸν καιρὸν τῆς ἀμπώτεως· ἄρτι γὰρ τὸ πάθος ἥπτετο τῆς
               θαλάσσης, καὶ ὁ στόλος ἐσαλεύετο, ἠρέμα πρῶτον, εἶτα ὀξύτερον, μέχρι σὺν βιαίῳ τάχει
               διέπλευσεν ὁ Καῖσαρ ἐς τὴν Βρεττανίαν.</p>
-                  </quote>
-                  <bibl/>
-               </cit></div>
-               <div n="II" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>ὅτι Ὀλυμπιάδων τοῖς Ἕλλησιν ἑπτὰ καὶ ἐνενήκοντα γεγενημένων, τῆς
+               </quote>
+               <bibl/>
+            </cit>
+         </div>
+         <div n="II" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>ὅτι Ὀλυμπιάδων τοῖς Ἕλλησιν ἑπτὰ καὶ ἐνενήκοντα γεγενημένων, τῆς
               γῆς τῶν Κελτῶν οὐκ ἀρκούσης αὐτοῖς διὰ τὸ πλῆθος, ἀνίσταται μοῖρα Κελτῶν τῶν ἀμφὶ τὸν
               Ῥῆνον ἱκανὴ κατὰ ζήτησιν ἑτέρας γῆς· οἳ τό τε Ἄλπειον ὄρος ὑπερέβησαν, καὶ Κλουσίνοις,
               εὐδαίμονα γῆν ἔχουσι Τυρρηνῶν, ἐπολέμουν. οὐ πάλαι δὲ οἱ Κλουσῖνοι Ῥωμαίοις ἔνσπονδοι
@@ -164,12 +164,14 @@
               λεηλατοῦσιν ἀπερισκέπτως. καὶ συνεκδημοῦντες αὐτοῖς ἀναιροῦσι τῶν Κελτῶν πολὺ πλῆθος
               ἐν προνομῇ, καὶ τὸν ἡγούμενον ἐκείνου τοῦ μέρους αὐτὸς ὁ Ῥωμαίων πρεσβευτὴς Κόιντος
               Φάβιος ἀνεῖλέ τε καὶ ἐσκύλευσε, καὶ τὰ ὅπλα φορῶν ἐπανῆλθεν ἐς Κλούσιον.</p>
-                  </quote>
-                  <bibl>υ. π. 349.</bibl>
-               </cit></div>
-               <div n="III" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>ὅτι ὁ τῶν Κελτῶν βασιλεὺς Βρέννος, τῶν Φαβίων τῶν Ῥωμαίων πολλοὺς
+               </quote>
+               <bibl>υ. π. 349.</bibl>
+            </cit>
+         </div>
+         <div n="III" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>ὅτι ὁ τῶν Κελτῶν βασιλεὺς Βρέννος, τῶν Φαβίων τῶν Ῥωμαίων πολλοὺς
               ἀνελόντων Κελτῶν, μὴ δεξάμενος τοὺς Ῥωμαίων πρέσβεις, ἐπὶ τούτοις πρέσβεις
               ἐπιλεξάμενος ἐς κατάπληξιν, οἳ Κελτῶν ἁπάντων μεγάλων τὰ σώματα ὄντων ὑπερέβαλλον,
               ἐξέπεμπεν ἐς Ῥώμην, αἰτιώμενος τοὺς Φαβίους ὅτι πρεσβεύοντες παρὰ τοὺς κοινοὺς νόμους
@@ -182,80 +184,95 @@
               ἦσαν ὑπʼ ἐκείνῳ, νομίσαντες ὑβρίσθαι καὶ χαλεπῶς ἐνεγκόντες ἐς τοὺς ἄλλους Κελτοὺς
               περιέπεμπον, ἀξιοῦντες αὐτοὺς συνεφάψασθαι τοῦδε τοῦ πολέμου. καὶ πολλῶν ἀφικομένων
               ἄραντες ἤλαυνον ἐπὶ τὴν Ῥώμην.</p>
-                  </quote>
-                  <bibl>ιδ. π. 350.</bibl>
-               </cit></div>
-               <div n="IV" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>ὁ δὲ ὑφίσταται γράμματα διοίσειν διὰ τῶν ἐχθρῶν ἐς τὸ
+               </quote>
+               <bibl>ιδ. π. 350.</bibl>
+            </cit>
+         </div>
+         <div n="IV" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>ὁ δὲ ὑφίσταται γράμματα διοίσειν διὰ τῶν ἐχθρῶν ἐς τὸ
               Καπιτώλιον.</p>
-                  </quote>
-                  <bibl>συιδ. ϝ. <foreign xml:lang="grc">ὑφίσταται</foreign>.</bibl>
-               </cit></div>
-               <div n="V" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>ὅτι Καιδίκιος γράμμα φέρων ἀπὸ τῆς βουλῆς περὶ τῆς ὑπάτου ἀρχῆς,
+               </quote>
+               <bibl>συιδ. ϝ. <foreign xml:lang="grc">ὑφίσταται</foreign>.</bibl>
+            </cit>
+         </div>
+         <div n="V" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>ὅτι Καιδίκιος γράμμα φέρων ἀπὸ τῆς βουλῆς περὶ τῆς ὑπάτου ἀρχῆς,
               παρεκάλει τὸν Κάμιλλον μηδὲν ἐν τῷ παρόντι μηνῖσαι τῇ πατρίδι τῆς ζημίας. ὁ δὲ ἐπισχὼν
               αὐτὸν ἔτι λέγοντα εἶπεν, <q rend="double">οὐκ ἂν ηὐξάμην ἐπιποθῆσαί με Ῥωμαίους, εἰ τοιαύτην ἤλπισα
                 τὴν ἐπιπόθησιν αὐτοῖς ἔσεσθαι. νῦν δὲ δικαιοτέραν εὐχὴν εὔχομαι, γενέσθαι τῇ πατρίδι
                 χρήσιμος ἐς τοσοῦτον ἀγαθοῦ ἐς ὅσον κακοῦ περιελήλυθεν.</q>
-                     </p>
-                  </quote>
-                  <bibl>ϝαλ. π. 557.</bibl>
-               </cit></div>
-               <div n="VI" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>ὅτι Κελτοὶ μηδεμιᾷ μηχανῇ δυνηθέντες ἐπιβῆναι τῆς ἀκροπόλεως,
+                  </p>
+               </quote>
+               <bibl>ϝαλ. π. 557.</bibl>
+            </cit>
+         </div>
+         <div n="VI" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>ὅτι Κελτοὶ μηδεμιᾷ μηχανῇ δυνηθέντες ἐπιβῆναι τῆς ἀκροπόλεως,
               ἠρέμουν ὡς λιμῷ τοὺς ἔνδον παραστησόμενοι. καί τις ἀπὸ τοῦ Καπιτωλίου κατέβαινεν
               ἱερεύς, ὄνομα Δόρσων, ἐπὶ ἐτήσιον δή τινα ἱερουργίαν ἐς τὸν τῆς Ἑστίας νεὼν στέλλων τὰ
               ἱερὰ διὰ τῶν πολεμίων, αἰδεσθέντων ἢ καταπλαγέντων αὐτοῦ τὴν τόλμαν ἢ τὴν εὐσέβειαν, ἢ
               τὴν ὄψιν ἱερὰν οὖσαν. ὁ μὲν δὴ κινδυνεύειν ὑπὲρ τῶν ἱερῶν ἑλόμενος ὑπʼ αὐτῶν ἐσώζετο
               τῶν ἱερῶν. καὶ τόδε φησὶν ὧδε γενέσθαι Κάσσιος ὁ Ῥωμαῖος.</p>
-                  </quote>
-                  <bibl>ιδ. ιβ.</bibl>
-               </cit></div>
-               <div n="VII" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>τοῦ δὲ οἴνου καὶ τῶν ἄλλων ἄδην ἐνεπίμπλαντο οἱ Κελτοί, τήν τε
+               </quote>
+               <bibl>ιδ. ιβ.</bibl>
+            </cit>
+         </div>
+         <div n="VII" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>τοῦ δὲ οἴνου καὶ τῶν ἄλλων ἄδην ἐνεπίμπλαντο οἱ Κελτοί, τήν τε
               φύσιν ὄντες ἀκρατεῖς, καὶ χώραν ἔχοντες, ὅτι μὴ πρὸς δημητριακοὺς καρπούς, τῶν ἄλλων
               ἄγονον καὶ ἀφυᾶ. τά τε σώματα αὐτοῖς μεγάλα ὄντα καὶ τρυφηλὰ καὶ σαρκῶν ὑγρῶν μεστὰ
               ὑπὸ τῆς ἀδηφαγίας καὶ μέθης ἐς ὄγκον καὶ βάρος ἐξεχεῖτο, καὶ πρὸς δρόμους καὶ πόνους
               ἀδύνατα πάμπαν ἐγίγνετο· ὑπό τε ἱδρῶτος καὶ ἄσθματος, ὅπου τι δέοι κάμνειν, ἐξελύοντο
               ταχέως.</p>
-                  </quote>
-                  <bibl>ιδ. ιβ. ετ ηινξ συιδ. ϝ. <foreign xml:lang="grc">ἄδην</foreign>.</bibl>
-               </cit></div>
-               <div n="VIII" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>οὓς γυμνοὺς ἐπεδείκνυε Ῥωμαίοις, <q rend="double">οὗτοί εἰσιν οἱ τὴν βοὴν
+               </quote>
+               <bibl>ιδ. ιβ. ετ ηινξ συιδ. ϝ. <foreign xml:lang="grc">ἄδην</foreign>.</bibl>
+            </cit>
+         </div>
+         <div n="VIII" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>οὓς γυμνοὺς ἐπεδείκνυε Ῥωμαίοις, <q rend="double">οὗτοί εἰσιν οἱ τὴν βοὴν
                 βαρεῖαν ἱέντες ὑμῖν ἐν ταῖς μάχαις καὶ τὰ ὅπλα παταγοῦντες καὶ ξίφη μακρὰ καὶ κόμας
                 αἰωροῦντες. ὧν τὸ ἄτολμον ὁρῶντες, καὶ τὸ σῶμα μαλακὸν καὶ ἄτονον, προσίεσθε τῷ
                 ἔργῳ.</q>
-                     </p>
-                  </quote>
-                  <bibl>συιδ. ϝ. <foreign xml:lang="grc">ἱέντες</foreign>.</bibl>
-               </cit></div>
-
-               <div n="IX" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>τὸν δὲ δῆμον ἀπὸ τοῦ τείχους ὁρᾶν, καὶ τοῖς πονουμένοις ἑτέρους
+                  </p>
+               </quote>
+               <bibl>συιδ. ϝ. <foreign xml:lang="grc">ἱέντες</foreign>.</bibl>
+            </cit>
+         </div>
+         <div n="IX" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>τὸν δὲ δῆμον ἀπὸ τοῦ τείχους ὁρᾶν, καὶ τοῖς πονουμένοις ἑτέρους
               νεαλεῖς ἐπιπέμπειν ἀεί. οἱ δὲ Κελτοὶ κεκμηκότες ἀκμῆσι συμπλεκόμενοι ἔφευγον
               ἀτάκτως.</p>
-                  </quote>
-                  <bibl>ιδ. ϝ. <foreign xml:lang="grc">νεαλής</foreign>.</bibl>
-               </cit></div>
-               <div n="X" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>ὁ δὲ Κελτὸς ἀγανακτῶν καὶ λιφαιμῶν ἐδιωκε τὸν Οὐαλέριον,
+               </quote>
+               <bibl>ιδ. ϝ. <foreign xml:lang="grc">νεαλής</foreign>.</bibl>
+            </cit>
+         </div>
+         <div n="X" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>ὁ δὲ Κελτὸς ἀγανακτῶν καὶ λιφαιμῶν ἐδιωκε τὸν Οὐαλέριον,
               συγκαταπεσεῖν ἐπειγομενος· ὑπὸ δὲ τοὺς πόδας ἀναχωροῦντος ἀεὶ τοῦ Οὐαλερίου κατέπεσε
               πρηνὴς ὁ Κελτός. καὶ δεύτερον τοῦτο μονομάχιον ἐπὶ Κελτοῖς ἐμεγαλαύχουν οἱ
               Ῥωμαῖοι.</p>
-                  </quote>
-                  <bibl>ιδ. ϝ. <foreign xml:lang="grc">λιφαιμεῖ</foreign>.</bibl>
-               </cit></div>
-               <div n="XI" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>ὅτι τὸ τῶν Σενόνων ἔθνος ἔνσπονδον ἦν Ῥωμαίοις, καὶ ἐμισθοφόρουν
+               </quote>
+               <bibl>ιδ. ϝ. <foreign xml:lang="grc">λιφαιμεῖ</foreign>.</bibl>
+            </cit>
+         </div>
+         <div n="XI" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>ὅτι τὸ τῶν Σενόνων ἔθνος ἔνσπονδον ἦν Ῥωμαίοις, καὶ ἐμισθοφόρουν
               κατὰ Ῥωμαίων. ἡ δὲ βουλὴ πρέσβεις ἔπεμψεν ἐγκαλέσοντας ὅτι ὄντες ἔνσπονδοι
               μισθοφοροῦσι κατὰ Ῥωμαίων. τούτους Βριτόμαρις ὁ Κελτός, ἀγανακτῶν ὑπὲρ τοῦ πατρὸς ὅτι
               συμμαχῶν Τυρρηνοῖς ὑπὸ Ῥωμαίων ἐν τῷδε τῷ πολέμῳ διέφθαρτο, τά τε κηρύκεια φέροντας
@@ -268,12 +285,14 @@
               πατρίδας ἐς ἃς διαφύγωσι, συνέπεσον ἐς χεῖρας ὑπὸ τόλμης τῷ Δομετίῳ, καὶ ἡττώμενοι
               σφᾶς αὐτοὺς ὑπʼ ὀργῆς διεχρῶντο μανικῶς. καὶ δίκη μὲν ἥδε παρανομίας ἐς πρέσβεις
               ἐγένετο Σένοσιν.</p>
-                  </quote>
-                  <bibl>υ. π. 350.</bibl>
-               </cit></div>
-               <div n="XII" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>ὅτι οἱ Σαλύων δυνάσται, τοῦ ἔθνους ἡττηθέντος ὑπὸ Ῥωμαίων, ἐς
+               </quote>
+               <bibl>υ. π. 350.</bibl>
+            </cit>
+         </div>
+         <div n="XII" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>ὅτι οἱ Σαλύων δυνάσται, τοῦ ἔθνους ἡττηθέντος ὑπὸ Ῥωμαίων, ἐς
               Ἀλλόβριγας κατέφυγον. καὶ αὐτοὺς ἐξαιτοῦντες οἱ Ῥωμαῖοι στρατεύουσιν ἐπὶ τοὺς
               Ἀλλόβριγας οὐκ ἐκδιδόντας, ἡγουμένου σφῶν Γναίου Δομετίου. ᾧ παροδεύοντι τὴν τῶν
               Σαλύων ἐντυγχάνει πρεσβευτὴς Βιτοίτου βασιλέως τῶν Ἀλλοβρίγων, ἐσκευασμένος τε
@@ -282,13 +301,14 @@
               Βιτοῖτον, εἶτʼ Ἀλλόβριγας, εἶτα τὸν πρεσβευτὴν αὐτὸν ἔς τε γένος καὶ ἀνδρείαν καὶ
               περιουσίαν ὑμνῶν· οὗ δὴ καὶ μάλιστα ἕνεκα αὐτοὺς οἱ τῶν πρεσβευτῶν ἐπιφανεῖς
               ἐπάγονται. ἀλλʼ ὁ μὲν συγγνώμην αἰτῶν τοῖς Σαλύων δυνάσταις ἀπέτυχεν.</p>
-                  </quote>
-                  <bibl>ιδ. π. 351.</bibl>
-               </cit></div>
-
-               <div n="XIII" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>ὅτι τῶν Τευτόνων μοῖρα λῃστεύουσα πολύανδρος ἐς τὴν γῆν τῶν
+               </quote>
+               <bibl>ιδ. π. 351.</bibl>
+            </cit>
+         </div>
+         <div n="XIII" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>ὅτι τῶν Τευτόνων μοῖρα λῃστεύουσα πολύανδρος ἐς τὴν γῆν τῶν
               Νωρικῶν ἐσέβαλε, καὶ ὁ Ῥωμαίων ὕπατος Παπίριος Κάρβων δείσας μὴ ἐς τὴν Ἰταλίαν
               ἐσβάλοιεν, ἐφήδρευε τοῖς Ἀλπείοις, ᾗ μάλιστά ἐστιν ἡ διάβασις στενωτάτη. οὐκ
               ἐπιχειρούντων δʼ ἐκείνων αὐτὸς ἐπέβαινεν αὐτοῖς, αἰτιώμενος ἐς Νωρικοὺς ἐσβαλεῖν,
@@ -302,19 +322,23 @@
               τῆς μάχης ἔτι συνεστώσης ἐπιπεσοῦσαι, διέστησαν αὐτοὺς ἀπʼ ἀλλήλων, καὶ ὁ ἀγὼν ὑπὸ τῆς
               ἄνωθεν ἐκπλήξεως διελύθη. σποράδες δὲ καὶ ὣς ἐς ὕλας οἱ Ῥωμαῖοι διαφυγόντες, τρίτῃ
               μόλις ἡμέρᾳ συνῆλθον. καὶ Τεύτονες ἐς Γαλάτας ἐχώρουν.</p>
-                  </quote>
-                  <bibl>ιδ. π. 352.</bibl>
-               </cit></div>
-               <div n="XIV" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>ὁ δὲ τοῖς σώμασι τῶν Κίμβρων ἀψαυστεῖν ἐκέλευεν, ἕως ἡμέρα
+               </quote>
+               <bibl>ιδ. π. 352.</bibl>
+            </cit>
+         </div>
+         <div n="XIV" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>ὁ δὲ τοῖς σώμασι τῶν Κίμβρων ἀψαυστεῖν ἐκέλευεν, ἕως ἡμέρα
               γένγται, πολύχρυσα εἶναι δοκῶν.</p>
-                  </quote>
-                  <bibl>συιδ. ϝϝ. <foreign xml:lang="grc">ἀψαύστως</foreign> ετ <foreign xml:lang="grc">Κίμβρος</foreign>.</bibl>
-               </cit></div>
-               <div n="XV" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>ὅτι ἔθνη δύο Τιγύριοι καὶ Ἑλουήτιοι ἐς τὴν Ῥωμαίων Κελτικὴν
+               </quote>
+               <bibl>συιδ. ϝϝ. <foreign xml:lang="grc">ἀψαύστως</foreign> ετ <foreign xml:lang="grc">Κίμβρος</foreign>.</bibl>
+            </cit>
+         </div>
+         <div n="XV" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>ὅτι ἔθνη δύο Τιγύριοι καὶ Ἑλουήτιοι ἐς τὴν Ῥωμαίων Κελτικὴν
               ἐσέβαλον, καὶ τούτων τὸν στόλον ὁ Καῖσαρ Γάϊος πυθόμενος διετείχισεν ὅσα περὶ Ῥοδανόν
               ἐστι ποταμὸν ἐς ἑκατὸν καὶ πεντήκοντα σταδίους μάλιστα. καὶ πρεσβευσαμένοις ἐπὶ
               διαπείρᾳ τοῖς πολεμίοις ὑπὲρ σπονδῶν ἐκέλευεν ὅμηρα δοῦναι καὶ χρήματα. ἀποκριναμένων
@@ -323,31 +347,37 @@
               ἐχώρει, προσλαβὼν Γαλατῶν τῶν ὀρείων ἐς δισμυρίους. καὶ γίγνεται Λαβιηνῷ τὸ ἔργον
               εὐμαρές, ἀδοκήτοις Τιγυρίοις περὶ τὸν ποταμὸν ἐπιπεσόντι, καὶ τρεψαμένῳ καὶ σκεδάσαντι
               τοὺς πολλοὺς ἐν ἀσυνταξίᾳ.</p>
-                  </quote>
-                  <bibl>υ. π. 352.</bibl>
-               </cit></div>
-               <div n="XVI" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>ὅτι Ἀριόουιστος, Γερμανῶν βασιλεὺς τῶν ὑπὲρ Ῥῆνον, ἐπιβαίνων τῆς
+               </quote>
+               <bibl>υ. π. 352.</bibl>
+            </cit>
+         </div>
+         <div n="XVI" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>ὅτι Ἀριόουιστος, Γερμανῶν βασιλεὺς τῶν ὑπὲρ Ῥῆνον, ἐπιβαίνων τῆς
               πέραν Αἰδούοις ἔτι πρὸ τοῦ Καίσαρος ἐπολέμει φίλοις οὖσι Ῥωμαίων. τότε μὲν δή, τοῖς
               Ῥωμαίοις κελεύουσι πεισθείς, ἀνέζευζεν ἀπὸ τῶν Αἰδούων, καὶ φίλος ἠξίωσε Ῥωμαίοις
               γενέσθαι. καὶ ἐγένετο, ὑπατεύοντος αὐτοῦ Καίσαρος καὶ ψηφισαμένου.</p>
-                  </quote>
-                  <bibl>ιδ. π. 353.</bibl>
-               </cit></div>
-               <div n="XVII" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>ὅτι Ἀριόουιστος ὁ Γερμανῶν βασιλεύς, φίλος γενόμενος Ῥωμαίων, ἐς
+               </quote>
+               <bibl>ιδ. π. 353.</bibl>
+            </cit>
+         </div>
+         <div n="XVII" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>ὅτι Ἀριόουιστος ὁ Γερμανῶν βασιλεύς, φίλος γενόμενος Ῥωμαίων, ἐς
               λόγους ἦλθε τῷ Καίσαρι, καὶ διαχωρισθέντων ἀπʼ ἀλλήλων αὖθις συνελθεῖν ἐς λόγους
               ἠξίωσεν. τοῦ δὲ Καίσαρος οὐ συνελθόντος, ἀλλὰ τοὺς πρωτεύοντας Γαλατῶν ἀποστείλαντος,
               ἔδησε τοὺς πρέσβεις. καὶ ὁ Καῖσαρ ἐστράτευεν ἐπʼ αὐτὸν μετʼ ἀπειλῆς. δέος δʼ ἐμπίπτει
               τῷ στρατῷ κατὰ κλέος τῶν Γερμανῶν.</p>
-                  </quote>
-                  <bibl>ιδ. ιβ.</bibl>
-               </cit></div>
-               <div n="XVIII" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>ὅτι Οὐσιπέται, ἔθνος Γερμανικόν, καὶ Ταγχρέαι δοκοῦσι πρότεροι
+               </quote>
+               <bibl>ιδ. ιβ.</bibl>
+            </cit>
+         </div>
+         <div n="XVIII" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>ὅτι Οὐσιπέται, ἔθνος Γερμανικόν, καὶ Ταγχρέαι δοκοῦσι πρότεροι
               σφετέροις ἱππεῦσιν ὀκτακοσίοις τρέψασθαι τῶν Καίσαρος ἱππέων ἐς πεντακισχιλίους, ὁ δὲ
               Καῖσαρ αὐτοῖς πρεσβευομένοις ἐς αὐτὸν ἐπιθέσθαι, τοὺς πρέσβεις κατασχών, καὶ τὸ πάθος
               ἐκείνοις ἐς τέλος αἰφνίδιον οὕτω συνενεχθῆναι ὡς τεσσαράκοντα μυριάδας τούτων
@@ -359,32 +389,37 @@
               ἐπιθέσθαι τοῖς ὀκτακοσίοις, καὶ παρʼ αὐτὸ τρέψαι τοὺς Ῥωμαίων πεντακισχιλίους.
               ἐπιπρεσβευομένων δʼ αὐτῶν καὶ περὶ τοῦ παρασπονδήματος ἀπολογουμένων, ὑποτοπήσας
               ἐνέδραν ὁμοίαν, ἐπιθέσθαι πρὸ τῶν ἀποκρίσεων.</p>
-                  </quote>
-                  <bibl>ιδ. ιβ.</bibl>
-               </cit></div>
-               <div n="XIX" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>εὐθὺς ἠρέθιζον τοὺς Βρεττανοὺς παρορκῆσαι, ἔγκλημα ἔχοντας ὅτι
+               </quote>
+               <bibl>ιδ. ιβ.</bibl>
+            </cit>
+         </div>
+         <div n="XIX" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>εὐθὺς ἠρέθιζον τοὺς Βρεττανοὺς παρορκῆσαι, ἔγκλημα ἔχοντας ὅτι
               σπονδῶν σφίσι γενομένων ἔτι παρῆν τὸ στρατόπεδον.</p>
-                  </quote>
-                  <bibl>συιδ. ϝ. <foreign xml:lang="grc">παρορκῆσαι</foreign>.</bibl>
-               </cit></div>
-               <div n="XX" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>δείσας ὁ Καῖσαρ περὶ τῷ Κικέρωνι ὑπέστρεφεν εἰς
+               </quote>
+               <bibl>συιδ. ϝ. <foreign xml:lang="grc">παρορκῆσαι</foreign>.</bibl>
+            </cit>
+         </div>
+         <div n="XX" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>δείσας ὁ Καῖσαρ περὶ τῷ Κικέρωνι ὑπέστρεφεν εἰς
             τοὐπίσω.</p>
-                  </quote>
-                  <bibl>ιδ. ϝ. <foreign xml:lang="grc">δείσαντες</foreign>.</bibl>
-               </cit></div>
-               <div n="XXI" type="textpart" subtype="fragment"><cit>
-                  <quote xml:lang="grc">
-                     <p>ὅτι ὁ Βριτόρης διέφθειρεν Αἰδούους Ῥωμαίων ἀποστῆναι, καὶ τοῦ
+               </quote>
+               <bibl>ιδ. ϝ. <foreign xml:lang="grc">δείσαντες</foreign>.</bibl>
+            </cit>
+         </div>
+         <div n="XXI" type="fragment">
+            <cit>
+               <quote xml:lang="grc">
+                  <p>ὅτι ὁ Βριτόρης διέφθειρεν Αἰδούους Ῥωμαίων ἀποστῆναι, καὶ τοῦ
               Καίσαρος ὀνειδίσαντος αὐτοῖς φιλίαν ἔφασαν παλαιὰν ἐφθακέναι.</p>
-                  </quote>
-                  <bibl>μαι, σξριπτορυμ ϝετερυμ νοϝ. ξολλεξτ. τ. 2 π. 367.</bibl>
-               </cit></div>
+               </quote>
+               <bibl>μαι, σξριπτορυμ ϝετερυμ νοϝ. ξολλεξτ. τ. 2 π. 367.</bibl>
+            </cit>
          </div>
       </body>
-  </text>
-
+   </text>
 </TEI>

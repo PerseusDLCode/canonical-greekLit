@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-model href="https://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?><TEI xmlns="http://www.tei-c.org/ns/1.0">
   <teiHeader xml:lang="eng">
     <fileDesc>
       <titleStmt>
@@ -71,7 +70,7 @@
       <!-- <refsDecl doctype="TEI.2">
 <state unit="page" resp="Spanheim" n="chunk" delim="."/> 
 </refsDecl> -->
-    </encodingDesc>
+    <refsDecl xml:id="CTS"><citeStructure match="/TEI/text/body" use="@xml:base"><citeStructure unit="letter" delim=":" match="div[@type='edition']/div[@type='textpart'][@subtype='letter']" use="@n"><citeStructure unit="paragraph" delim="." match="div[@type='textpart'][@subtype='paragraph']" use="@n"/></citeStructure></citeStructure></refsDecl></encodingDesc>
     <profileDesc>
       <langUsage>
         <language ident="grc">Greek</language>
@@ -84,7 +83,7 @@
   </teiHeader>   
  
   <text>
-  <body>
+  <body xml:base="urn:cts:greekLit:tlg2003.tlg013.perseus-grc2">
     <div type="edition" n="urn:cts:greekLit:tlg2003.tlg013.perseus-grc2" xml:lang="grc">
     <pb n="v.2.p.296"/>
     

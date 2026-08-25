@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-model href="https://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?><TEI xmlns="http://www.tei-c.org/ns/1.0">
     <teiHeader xml:lang="eng">
         <fileDesc>
             <titleStmt>
@@ -49,12 +48,11 @@
 
         <encodingDesc>
             <refsDecl n="CTS">
-                <cRefPattern n="sentence" matchPattern="(\w+)"
-                    replacementPattern="#xpath(/tei:TEI/tei:text/tei:body/tei:div/tei:div[@n='$1'])">
+                <cRefPattern n="sentence" matchPattern="(\w+)" replacementPattern="#xpath(/tei:TEI/tei:text/tei:body/tei:div/tei:div[@n='$1'])">
                     <p>This pointer pattern extracts sentence</p>
                 </cRefPattern>
             </refsDecl>
-        </encodingDesc>
+        <refsDecl xml:id="CTS"><citeStructure match="/TEI/text/body" use="@xml:base"><citeStructure unit="sentence" delim=":" match="div[@type='edition']/div[@type='textpart'][@subtype='sentence']" use="@n"/></citeStructure></refsDecl></encodingDesc>
 
         <profileDesc>
             <langUsage>
@@ -65,7 +63,7 @@
     </teiHeader>
     
  <text>
-<body>
+<body xml:base="urn:cts:greekLit:tlg0557.tlg005.perseus-grc2">
 <div type="edition" n="urn:cts:greekLit:tlg0557.tlg005.perseus-grc2" xml:lang="grc">     
 <head xml:lang="lat">Gnomologium Epicteteum (e Stobaei libris 3-4)</head>
 <div type="textpart" subtype="sentence" xml:base="urn:cts:greekLit:tlg0557.tlg005.perseus-grc2" n="1">

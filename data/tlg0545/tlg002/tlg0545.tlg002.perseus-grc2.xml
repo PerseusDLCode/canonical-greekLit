@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-model href="https://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?><TEI xmlns="http://www.tei-c.org/ns/1.0">
     <teiHeader xml:lang="eng">
   <fileDesc>
    <titleStmt>
@@ -54,16 +53,14 @@
 <state unit="chapter" n="chunk"/>
 </refsDecl>-->
     <refsDecl n="CTS">
-        <cRefPattern matchPattern="(\w+).(\w+)"
-            replacementPattern="#xpath(/tei:TEI/tei:text/tei:body/tei:div/tei:div[@n='$1']/tei:div[@n='$2'])" n="chapter">
+        <cRefPattern matchPattern="(\w+).(\w+)" replacementPattern="#xpath(/tei:TEI/tei:text/tei:body/tei:div/tei:div[@n='$1']/tei:div[@n='$2'])" n="chapter">
             <p>This pointer pattern extracts book and chapter</p>
         </cRefPattern>
-        <cRefPattern matchPattern="(\w+)"
-            replacementPattern="#xpath(/tei:TEI/tei:text/tei:body/tei:div/tei:div[@n='$1'])" n="book">
+        <cRefPattern matchPattern="(\w+)" replacementPattern="#xpath(/tei:TEI/tei:text/tei:body/tei:div/tei:div[@n='$1'])" n="book">
             <p>This pointer pattern extracts book</p>
         </cRefPattern>
     </refsDecl>
-</encodingDesc>
+<refsDecl xml:id="CTS"><citeStructure match="/TEI/text/body" use="@xml:base"><citeStructure unit="book" delim=":" match="div[@type='edition']/div[@type='textpart'][@subtype='book']" use="@n"><citeStructure unit="chapter" delim="." match="div[@type='textpart'][@subtype='chapter']" use="@n"/></citeStructure></citeStructure></refsDecl></encodingDesc>
        
 <profileDesc>
 <langUsage>
@@ -82,7 +79,7 @@
 </teiHeader>
     
 <text>
-<body>
+<body xml:base="urn:cts:greekLit:tlg0545.tlg002.perseus-grc2">
     <div type="edition" xml:lang="grc" n="urn:cts:greekLit:tlg0545.tlg002.perseus-grc2"> 
 <pb xml:id="p.3"/>
 <div type="textpart" subtype="book" xml:base="urn:cts:greekLit:tlg0545.tlg002.perseus-grc2" n="1"> 

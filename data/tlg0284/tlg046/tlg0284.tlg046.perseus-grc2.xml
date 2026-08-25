@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0">
   <teiHeader xml:lang="eng">
     <fileDesc>
@@ -55,7 +55,7 @@
         <refState delim="." unit="text"/> 
         <refState unit="Jebb_page"/> 
       </refsDecl>
-    </encodingDesc>
+    <refsDecl xml:id="CTS"><citeStructure match="/TEI/text/body" use="@xml:base"><citeStructure unit="Jebb_page" delim=":" match="div[@type='edition']/div[@type='textpart'][@subtype='Jebb_page']" use="@n"/></citeStructure></refsDecl></encodingDesc>
     
     <profileDesc>
       <langUsage>
@@ -64,12 +64,12 @@
     </profileDesc>
     
     <revisionDesc>
-      <change when="2023-07-05" who="Lisa Cerrato" >EpiDoc and CTS Conversion</change>
+      <change when="2023-07-05" who="Lisa Cerrato">EpiDoc and CTS Conversion</change>
     </revisionDesc>
   </teiHeader>
   
   <text>
-    <body>
+    <body xml:base="urn:cts:greekLit:tlg0284.tlg046.perseus-grc2">
       <div type="edition" n="urn:cts:greekLit:tlg0284.tlg046.perseus-grc2" xml:lang="grc">
         <pb xml:id="v.2.p.156"/>  
         <head rend="align(center)">Πρὸς Πλάτωνα ὑπὲρ τῶν τεττάρων</head> 

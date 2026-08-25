@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-model href="https://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?><TEI xmlns="http://www.tei-c.org/ns/1.0">
 	<teiHeader xml:lang="eng">
 		<fileDesc>
 			<titleStmt>
@@ -92,7 +91,7 @@
 					<p>This pointer pattern extracts oath.</p>
 				</cRefPattern>
 			</refsDecl>
-		</encodingDesc>
+		<refsDecl xml:id="CTS"><citeStructure match="/TEI/text/body" use="@xml:base"><citeStructure unit="translation" delim=":" match="div[@type='translation']" use="@n"><citeStructure unit="oath" delim="." match="div[@type='textpart'][@subtype='oath']" use="@n"/></citeStructure></citeStructure></refsDecl></encodingDesc>
 
 		<profileDesc>
 			<langUsage>
@@ -106,7 +105,7 @@
 	</teiHeader>
 	
 <text>
-<body>
+<body xml:base="urn:cts:greekLit:tlg0627.tlg013.perseus-eng5">
 <div type="translation" n="urn:cts:greekLit:tlg0627.tlg013.perseus-eng5" xml:lang="eng">
 <pb n="p.299"/>
 <div type="textpart" subtype="oath" n="1">

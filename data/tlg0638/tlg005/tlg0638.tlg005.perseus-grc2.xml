@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-model href="https://epidoc.stoa.org/schema/latest/tei-epidoc.rng" schematypens="http://relaxng.org/ns/structure/1.0"?><TEI xmlns="http://www.tei-c.org/ns/1.0">
     <teiHeader xml:lang="eng">
         <fileDesc>
             <titleStmt>
@@ -58,15 +57,14 @@
             replacementPattern="#xpath(/tei:TEI/tei:text/tei:body/tei:div/tei:div[@n='$1']/tei:div[@n='$2'])">
             <p>This pointer pattern extracts book and chapter.</p>
         </cRefPattern>-->
-        <cRefPattern n="work" matchPattern="(\w+)"
-            replacementPattern="#xpath(/tei:TEI/tei:text/tei:body/tei:div/tei:div[@n='$1'])">
+        <cRefPattern n="work" matchPattern="(\w+)" replacementPattern="#xpath(/tei:TEI/tei:text/tei:body/tei:div/tei:div[@n='$1'])">
             <p>This pointer pattern extracts work.</p>
         </cRefPattern>
     </refsDecl>
 <!--<refsDecl doctype="TEI.2">
 <state unit="olpage"/>
 </refsDecl>-->
-</encodingDesc>
+<refsDecl xml:id="CTS"><citeStructure match="/TEI/text/body" use="@xml:base"><citeStructure unit="work" delim=":" match="div[@type='edition']/div[@type='textpart'][@subtype='work']" use="@n"/></citeStructure></refsDecl></encodingDesc>
 <profileDesc>
 <langUsage>
 <language ident="grc">Greek</language>
@@ -78,7 +76,7 @@
 </teiHeader>
     
 <text>
-<body>
+<body xml:base="urn:cts:greekLit:tlg0638.tlg005.perseus-grc2">
     <div type="edition" n="urn:cts:greekLit:tlg0638.tlg005.perseus-grc2" xml:lang="grc">
      <div type="textpart" subtype="work" xml:base="urn:cts:greekLit:tlg0638.tlg005.perseus-grc2" n="work">
 <sp>
